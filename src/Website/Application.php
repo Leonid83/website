@@ -2,6 +2,7 @@
 namespace Freefeed\Website;
 
 
+use Freefeed\Website\Controllers\Dummy;
 use Monolog\Logger;
 use Predis\Silex\ClientsServiceProvider as PredisProvider;
 use Silex\Application\MonologTrait;
@@ -9,6 +10,7 @@ use Silex\Application\TwigTrait;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -111,12 +113,17 @@ class Application extends \Silex\Application
                 return new RedisSessionHandler($this['predis']['sessions']);
             }),
         ));
+
+        $this->register(new ServiceControllerServiceProvider());
     }
 
     public function setupRouting()
     {
-        $this->get('/', function() {
-            return $this->render('refuse.twig');
+        $this['controllers.dummy'] = $this->share(function(){
+            return new Dummy();
         });
+
+        $this->get('/', 'controllers.dummy:landingAction');
+        $this->get('/refuse', 'controllers.dummy:refuseAction');
     }
 }
