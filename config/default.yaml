@@ -6,6 +6,13 @@ session:
 debug: true
 db:
   master: {}
+smtp:
+  host: localhost
+  port: 25
+  username: null
+  password: null
+  encryption: null
+  auth_mode: null
 redis:
   sessions:
     parameters:

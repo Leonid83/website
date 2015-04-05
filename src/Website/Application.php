@@ -6,12 +6,14 @@ use Freefeed\Website\Controllers\Dummy;
 use Monolog\Logger;
 use Predis\Silex\ClientsServiceProvider as PredisProvider;
 use Silex\Application\MonologTrait;
+use Silex\Application\SwiftmailerTrait;
 use Silex\Application\TwigTrait;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\SwiftmailerServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
@@ -31,6 +33,7 @@ class Application extends \Silex\Application
     use UrlGeneratorTrait;
     use MonologTrait;
     use TwigTrait;
+    use SwiftmailerTrait;
 
     /** @var string  */
     protected $root;
@@ -115,6 +118,10 @@ class Application extends \Silex\Application
         ));
 
         $this->register(new ServiceControllerServiceProvider());
+
+        $this->register(new SwiftmailerServiceProvider(), array(
+            'swiftmailer.options' => $this->settings['smtp'],
+        ));
     }
 
     public function setupRouting()
