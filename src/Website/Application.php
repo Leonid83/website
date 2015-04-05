@@ -9,9 +9,11 @@ use Silex\Application\TwigTrait;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
+use Snc\RedisBundle\Session\Storage\Handler\RedisSessionHandler;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
@@ -96,6 +98,19 @@ class Application extends \Silex\Application
         $this->register(new PredisProvider(), [
             'predis.clients' => $this->settings['redis'],
         ]);
+
+        $this->register(new SessionServiceProvider(), array(
+            'session.storage.options' => array(
+                'name' => $this->settings['session']['cookie_name'],
+                'cookie_lifetime' => $this->settings['session']['cookie_lifetime'],
+                'cookie_httponly' => true,
+                'cookie_domain' => $this->settings['session']['cookie_domain'],
+                'cookie_secure' => $this->settings['session']['cookie_secure']
+            ),
+            'session.storage.handler' => $this->share(function(){
+                return new RedisSessionHandler($this['predis']['sessions']);
+            }),
+        ));
     }
 
     public function setupRouting()

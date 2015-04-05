@@ -1,4 +1,17 @@
+session:
+  cookie_name: xohza2noh3Ai
+  cookie_lifetime: 8640000
+  cookie_domain: localhost
+  cookie_secure: false
 debug: true
 db:
   master: {}
-redis: {}
+redis:
+  sessions:
+    parameters:
+      host: '127.0.0.1'
+      port: 6379
+      database: 'sessions'
+      timeout: 1.0
+    options:
+      profile: '2.8'
