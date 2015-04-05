@@ -1,0 +1,77 @@
+{% extends "_base+structure.twig" %}
+
+{% block before_content %}
+    <div class="section section_white">
+        <div class="section__wrapper">
+            <div class="page-icon page-icon_tap"></div>
+            <h2 class="page-title">Отказ от использования</h2>
+            <div class="page-subtitle">На этой странице вы можете отказаться использовать сервис FreeFeed.net и запретить нам выводить ваши данные <span class="ghost_text">из себя</span></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content content_left">
+        <h3>Как это работает?</h3>
+
+        <p>Что бы быть совершенно точно уверенными, что ваши данные (комментарии, посты, любой ваш контент) не будут выводиться на сервисе FreeFeed.net вы можете заполнить форму справа и нажмите "Отказаться от freefeed.net".</p>
+
+        <h3>Обязательно ли использовать эту форму?</h3>
+
+        <p>Не обязательно. Даже если вы не откажетесь явням образом от использования сервиса freefeed.net - мы без вашего разрешения не будем публиковать ваш контент нигде.</p>
+
+        <p>Тем не менее, если вы не воспользуетесь формой справа - мы не сможем идентифицировать вас, как хозяина контента определённого пользователя после 9 Апреля. Это значит, что если вы позже измените своё решение (и захотите восстановить ваши посты и комментарии на freefeed.net) - мы не сможем вам помочь.</p>
+
+        <h3>Зачем вам мой API ключ? Вы же всё скачаете?</h3>
+
+        <p>API ключ и адрес вашей электронной почты нам нужен для того, что бы понять что вы - это вы, после 9 Апреля. Идентифицировать пользователя после 9 Апреля, не сделав это сейчас - будет нельзя.</p>
+
+        <p>API ключ действительно даёт доступ ко всему вашему контенту. Тем не менее, использование этой формы - не приводит к скачиванию "direct messages" или какого-либо дополнительного контента.</p>
+
+        <h3>Мне по-прежнему непонятно что-то, что здесь не описано. Что мне делать?</h3>
+
+        <p>Напишите по адресу freefeed.net@gmail.com и мы постараемся вам быстро ответить.</p>
+
+        <h3>Я вижу, как вот это вот всё можно сделать лучше!</h3>
+
+        <p>Наиболее полезна конкретная работа, либо детализированная техническая спецификация улучшений. Если вы способны предоставить первое или второе - мы вас очень ждём, напишите туда же: freefeed.net@gmail.com, пожалуйста.</p>
+    </div>
+
+    <div class="content content_right">
+
+        <p><span class="mini">Для того, что бы заблокировать использование ваших данных (комментариев, постов) с friendfeed.com на freefeed.net, введите:</span></p>
+
+        <div class="opt-out-form__wrapper">
+            <form class="opt-out-form">
+                <div class="opt-out-form__label-wrapper">
+                    <label for="username">Имя пользователя:</label>
+                </div>
+                <div class="opt-out-form__field-wrapper">
+                    <input class="opt-out-form__text-input" id="username" name="username" type="text" placeholder="Username"/>
+                </div>
+                <div class="opt-out-form__label-wrapper">
+                    <label for="api_key">Ключ API (<a href="/">где он?</a>):</label>
+                </div>
+                <div class="opt-out-form__field-wrapper">
+                    <input class="opt-out-form__text-input" id="api_key" name="api_key" type="password" placeholder="API key"/>
+                </div>
+                <div  class="opt-out-form__label-wrapper">
+                    <label for="email">Ваш контактный адрес:</label>
+                </div>
+                <div  class="opt-out-form__field-wrapper">
+                    <input class="opt-out-form__text-input" id="email" name="email" type="text" placeholder="Email"/>
+                </div>
+                <div class="opt-out-form__checkbox-container">
+                    <div class="opt-out-form__checkbox-wrapper">
+                        <input class="opt-out-form__checkbox" id="accept-conditions" name="accept-conditions" type="checkbox"/>
+                    </div>
+                    <label for="accept-conditions" class="opt-out-form__checkbox-label">Я прочитал все условия и согласенс ними </label>
+                </div>
+                <div class="opt-out-form__submit-wrapper">
+                    <button class="opt-out-form__submit" type="submit">Отказаться от<br/>freefeed.net</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

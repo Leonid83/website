@@ -1,0 +1,33 @@
+{
+    "name": "freefeed/freefeed.net",
+    "description": "freefeed.net website",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexey Zakhlestin",
+            "email": "indeyets@gmail.com"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+
+    "require": {
+        "doctrine/dbal": "~2.5",
+        "flint/tacker": "~0.4.2",
+        "friendsofsymfony/http-cache": "~1.3",
+        "monolog/monolog": "~1.13",
+        "predis/service-provider": "~1.0.0",
+        "silex/silex": "~1.3",
+        "symfony/translation": "~2.6",
+        "symfony/twig-bridge": "~2.6",
+        "symfony/yaml": "~2.6",
+        "twig/twig": "~1.18"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Freefeed\\Website\\": "src/Website"
+        }
+    }
+}

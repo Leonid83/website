@@ -1,0 +1,129 @@
+{% extends "_base.twig" %}
+
+{% block everything %}
+    <div class="section section_image-background section_dawn section_dawn_short">
+        <div class="section__wrapper">
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="section section_silver">
+        <div class="section__wrapper h180">
+
+            <ul class="rainbow">
+                {% block menu %}
+                    <li class="rainbow__item rainbow__item_s rainbow__item_yellow">
+                        <a href="/" title="FreeFeed — Foobar">
+                            <div class="rainbow__icon rainbow__icon_polaroid"></div>
+                            <div class="rainbow__caption">Архивация:<br/>Clio 2.0</div>
+                        </a>
+                    </li>
+
+                    <li class="rainbow__item rainbow__item_s rainbow__item_blue">
+                        <a href="/" title="FreeFeed — Foobar">
+                            <div class="rainbow__icon rainbow__icon_tap"></div>
+                            <div class="rainbow__caption">Отказаться от<br/>использования</div>
+                        </a>
+                    </li>
+
+                    <li class="rainbow__item rainbow__item_s rainbow__item_white">
+                        <a href="/" title="FreeFeed — Foobar">
+                            <div class="rainbow__icon rainbow__icon_office"></div>
+                            <div class="rainbow__caption">Условия<br/>использования<br/><span class="micro">(мелкий шрифт!)</span></div>
+                        </a>
+                    </li>
+
+                    <li class="rainbow__item rainbow__item_s rainbow__item_gray">
+                        <a href="/" title="FreeFeed — Foobar">
+                            <div class="rainbow__icon rainbow__icon_shout"></div>
+                            <div class="rainbow__caption">Процесс<br/>переезда</div>
+                        </a>
+                    </li>
+
+                    <li class="rainbow__item rainbow__item_s rainbow__item_magenta">
+                        <a href="/" title="FreeFeed — Foobar">
+                            <div class="rainbow__icon rainbow__icon_safe"></div>
+                            <div class="rainbow__caption">Куда нести<br/>деньги</div>
+                        </a>
+                    </li>
+
+                    <li class="rainbow__item rainbow__item_s rainbow__item_black">
+                        <a href="/" title="FreeFeed — Foobar">
+                            <div class="rainbow__icon rainbow__icon_gear"></div>
+                            <div class="rainbow__caption">Кнопочки<br/>и рычажки</div>
+                        </a>
+                    </li>
+                {% endblock %}
+            </ul>
+
+        </div>
+    </div>
+
+    {% block before_content %}
+    {% endblock %}
+
+    <div class="section section_silver">
+        <div class="section__wrapper" style="padding-top: 25px;">
+            {% block content %}{% endblock %}
+
+            <div class="clear"></div>
+
+            {% block footer %}
+            <div class="growbox">
+                <div class="growbox__item">
+                    <div class="growbox__item-wrapper">
+                        <div class="growbox__icon growbox__icon_slack"></div>
+                        <p>Разработка как Pepyatka, так и FreeFeed.net координируется с помощью сервиса обмена сообщениями <a href="http://slack.com">Slack</a> (это чатик такой, похож не скайп).</p>
+
+                        <p>Вход открыт для всех. Легче всего получить приглашение, написав <a href="http://friendfeed.com/epicmonkey">@epicmonkey</a> либо по адресу <a href="mailto:freefeed.net@gmail.com">freefeed.net@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="growbox__item">
+                    <div class="growbox__item-wrapper">
+                        <div class="growbox__icon growbox__icon_skype"></div>
+                        <p>Какое-то время у нас были комнаты в Skype, но больше их нет (все переехали в Slack).</p>
+
+                        <p>Вы по-прежнему можете постучаться к <b>vladimiras_lekecinskas</b> и задать любой вопрос о FreeFeed.net</p>
+                    </div>
+                </div>
+
+                <div class="growbox__item">
+                    <div class="growbox__item-wrapper">
+                        <div class="growbox__icon growbox__icon_octocat"></div>
+                        <p>Код проекта Pepyatka <a href="https://github.com/pepyatka/pepyatka">хранится на GitHub</a>. Если вы хотите присоединиться к разработке: задачи по разработке серверной и клиентской частей.</p>
+
+                        <p><a href="https://github.com/zverok/clio/tree/clio2">Архиватор Clio</a> тоже есть на GitHub.</p>
+
+                        <p>FreeFeed.net пока не имеет своего кода. Вообще.</p>
+                    </div>
+                </div>
+
+                <div class="growbox__item">
+                    <div class="growbox__item-wrapper">
+                        <div class="growbox__icon growbox__icon_asana"></div>
+                        <p>Мы управляем задачами проекта FreeFeed.net в <a href="http://asana.com">Asana</a>. Доступ каждого пользователя стоит денег, поэтому пока ограничен. Поговорите с нами об этом.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer__site-title">
+                    <span class="site-title">
+                        <a class="site-title__link" href="/">FreeFeed.net</a>
+                    </span>
+                </div>
+
+                <div class="footer__navigation">
+                    <ul class="gray-nav">
+                        <li class="gray-nav__item"><a href="/">Архивация</a></li>
+                        <li class="gray-nav__item"><a href="/">Восстановление</a></li>
+                        <li class="gray-nav__item"><a href="/">Отказ от использования</a></li>
+                        <li class="gray-nav__item"><a href="/">Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
