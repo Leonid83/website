@@ -68,7 +68,22 @@ class User
     {
         $query = 'SELECT count(*) FROM `users` WHERE `email`=?';
         $stmt = $this->db->executeQuery($query, [$email]);
-        $stmt->execute([$email]);
+
+        return ($stmt->fetchColumn(0) > 0);
+    }
+
+    public function friendfeedNameIsTaken($name)
+    {
+        $query = 'SELECT count(*) FROM `users` WHERE `friendfeed_username`=?';
+        $stmt = $this->db->executeQuery($query, [$name]);
+
+        return ($stmt->fetchColumn(0) > 0);
+    }
+
+    public function freefeedNameIsTaken($name)
+    {
+        $query = 'SELECT count(*) FROM `users` WHERE `freefeed_username`=?';
+        $stmt = $this->db->executeQuery($query, [$name]);
 
         return ($stmt->fetchColumn(0) > 0);
     }

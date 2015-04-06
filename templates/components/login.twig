@@ -1,33 +1,38 @@
-<p><span class="mini">Для того, что бы авторизоваться и воспользоваться сервисами freefeed.net, введите:</span></p>
-{% if error is defined %}
-<p><span class="mini error">ОШИБКА: {{ error }}</span></p>
-{% endif %}
+{% if app.request.attributes.get('_logged_in') %}
+    <p><span class="mini">Вы уже авторизованы.</span></p>
+    <p>Здравствуйте {{ app.request.attributes.get('_username') }}!</p>
+{% else %}
+    <p><span class="mini">Для того, что бы авторизоваться и воспользоваться сервисами freefeed.net, введите:</span></p>
+    {% if error is defined %}
+        <p><span class="mini error">ОШИБКА: {{ error }}</span></p>
+    {% endif %}
 
-<div class="login-form__wrapper">
-    <form class="login-form" action="{{ path('login_submit') }}" method="post">
-        <div class="login-form__label-wrapper">
-            <label for="username">Имя пользователя:</label>
-        </div>
-        <div class="login-form__field-wrapper">
-            <input class="login-form__text-input" id="username" name="username" type="text" placeholder="Или email"/>
-        </div>
-
-        <div class="login-form__label-wrapper">
-            <label for="password">Пароль:</label>
-        </div>
-        <div class="login-form__field-wrapper">
-            <input class="login-form__text-input" id="password" name="password" type="password" placeholder="Password"/>
-        </div>
-
-        <div class="login-form__checkbox-container">
-            <div class="login-form__checkbox-wrapper">
-                <input class="login-form__checkbox" id="remember" name="remember" value="true" type="checkbox"/>
+    <div class="login-form__wrapper">
+        <form class="login-form" action="{{ path('login_submit') }}" method="post">
+            <div class="login-form__label-wrapper">
+                <label for="username">Имя пользователя:</label>
             </div>
-            <label for="remember" class="login-form__checkbox-label">Запомните меня </label>
-        </div>
+            <div class="login-form__field-wrapper">
+                <input class="login-form__text-input" id="username" name="username" type="text" placeholder="Или email"/>
+            </div>
 
-        <div class="login-form__submit-wrapper">
-            <button class="login-form__submit" type="submit">Зайти на<br/>freefeed.net</button>
-        </div>
-    </form>
-</div>
+            <div class="login-form__label-wrapper">
+                <label for="password">Пароль:</label>
+            </div>
+            <div class="login-form__field-wrapper">
+                <input class="login-form__text-input" id="password" name="password" type="password" placeholder="Password"/>
+            </div>
+
+            <div class="login-form__checkbox-container">
+                <div class="login-form__checkbox-wrapper">
+                    <input class="login-form__checkbox" id="remember" name="remember" value="true" type="checkbox"/>
+                </div>
+                <label for="remember" class="login-form__checkbox-label">Запомните меня </label>
+            </div>
+
+            <div class="login-form__submit-wrapper">
+                <button class="login-form__submit" type="submit">Зайти на<br/>freefeed.net</button>
+            </div>
+        </form>
+    </div>
+{% endif %}

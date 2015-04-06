@@ -1,0 +1,19 @@
+{% extends '_base+structure.twig' %}
+
+{% block content %}
+    <div class="content content_left">
+        <p>Your FreeFeed account is successfully activated.</p>
+
+        {% if password is not empty %}
+            <p>We tried to send you email with your new password, but something went wrong. So, we're showing you password now, instead.</p>
+            <p><b>password:</b> {{ password }}</p>
+            <p>We won't be showing it to you again, but you are free to change it whenever you want.</p>
+        {% else %}
+            <p>We sent you email with your password and further instructions.</p>
+        {% endif %}
+    </div>
+
+    <div class="content content_right">
+        {% include 'components/login.twig' %}
+    </div>
+{% endblock %}

@@ -22,6 +22,8 @@ use Snc\RedisBundle\Session\Storage\Handler\RedisSessionHandler;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Tacker\Configurator;
 use Tacker\Loader\CacheLoader;
 use Tacker\Loader\NormalizerLoader;
@@ -135,11 +137,37 @@ class Application extends \Silex\Application
             return new User();
         });
 
+        $this->before(function(Request $request) {
+            if (!$request->cookies->has($this->settings['session']['cookie_name'])) {
+                $request->attributes->set('_logged_in', false);
+                return;
+            }
+
+            /** @var SessionInterface $session */
+            $session = $this['session'];
+            $session->start();
+
+            $user_model = new \Freefeed\Website\Models\User($this);
+            $data = $user_model->getAccountFields($session->get('user'));
+
+            $request->attributes->set('_logged_in', $session->get('logged_in'));
+            $request->attributes->set('_username', $data['freefeed_username']);
+        });
+
         $this->get('/', 'controllers.dummy:landingAction')->bind('index');
         $this->get('/refuse', 'controllers.dummy:refuseAction');
 
         $this->get('/login', 'controllers.user:loginAction')->bind('login');
         $this->post('/login', 'controllers.user:loginPostAction')->bind('login_submit');
+
+        $this->get('/register', 'controllers.user:registerAction')->bind('register');
+        $this->post('/register', 'controllers.user:registerPostAction')->bind('register_submit');
+
+        $this->get('/register/success', 'controllers.user:registrationSuccessAction')->bind('registration_success');
+
+        $this->get('/register/validate/{secret}', 'controllers.user:validateEmailAction')
+            ->assert('secret', '\w{64}')
+            ->bind('validate_email');
     }
 
 
