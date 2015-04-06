@@ -150,6 +150,13 @@ class Application extends \Silex\Application
             $user_model = new \Freefeed\Website\Models\User($this);
             $data = $user_model->getAccountFields($session->get('user'));
 
+            if ($data === false) {
+                $request->attributes->set('_logged_in', false);
+                $session->clear();
+
+                return;
+            }
+
             $request->attributes->set('_logged_in', $session->get('logged_in'));
             $request->attributes->set('_username', $data['freefeed_username']);
         });
