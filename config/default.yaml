@@ -18,7 +18,7 @@ redis:
     parameters:
       host: '127.0.0.1'
       port: 6379
-      database: 'sessions'
+      database: 1
       timeout: 1.0
     options:
       profile: '2.8'
