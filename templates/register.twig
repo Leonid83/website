@@ -10,13 +10,13 @@
             </div>
         {% endif %}
 
-        <p>Если вы регистрировали свой email через direct'ы и уверены, что ваш аккаунт уже сохранён в Clio 2.0, то для регистрации достаточно указать email, имя вашего эккаунта на friendfeed и желаемое имя на freefeed.</p>
+        <p>Если вы регистрировали свой email через direct'ы и уверены, что ваш аккаунт уже сохранён в Clio 2.0, то для регистрации достаточно указать email, имя вашего эккаунта на friendfeed и желаемое имя на FreeFeed.</p>
         <p>Если вы дополнительно укажете API Key вашего эккаунта friendfeed, то этот сайт сможет запросить у Clio статус вашего архива и, сразу же, включить архивирование вашего фида если это ещё не сделано.</p>
         <p>Этот сайт ни при каких условиях <b>НЕ СОХРАНЯЕТ</b> API Key, а использует его только для разовой авторизации на сервисе Clio.</p>
     </div>
 
     <div class="content content_right">
-        <p><span class="mini">Для того, что бы зарезервировать для себя имя на freefeed.net и перенести свои данные (комментарии, записи) с friendfeed.com на freefeed.net, заполните:</span></p>
+        <p><span class="mini">Для того, что бы зарезервировать для себя имя на FreeFeed и перенести свои данные (комментарии, записи) с friendfeed на FreeFeed, заполните:</span></p>
 
         <div class="register-form__wrapper">
             <form class="register-form" action="{{ path('register_submit') }}" method="post">
@@ -28,14 +28,14 @@
                 </div>
 
                 <div class="register-form__label-wrapper">
-                    <label for="friendfeed_username">Имя на fr<b>iend</b>feed.net:</label>
+                    <label for="friendfeed_username">Имя на friendfeed:</label>
                 </div>
                 <div class="register-form__field-wrapper">
                     <input class="register-form__text-input" id="friendfeed_username" name="friendfeed_username" type="text" placeholder="friendfeed Username" value="{{ friendfeed_username|default('') }}" onblur="copy_to_freefeed();" />
                 </div>
 
                 <div class="register-form__label-wrapper">
-                    <label for="freefeed_username">Имя на fr<b>ee</b>feed.net:</label>
+                    <label for="freefeed_username">Имя на FreeFeed:</label>
                 </div>
                 <div class="register-form__field-wrapper">
                     <input class="register-form__text-input" id="freefeed_username" name="freefeed_username" type="text" placeholder="Freefeed Username" value="{{ freefeed_username|default('') }}"/>
@@ -59,11 +59,11 @@
                     <div class="register-form__checkbox-wrapper">
                         <input class="register-form__checkbox" id="restore_me" name="restore_me" type="checkbox" value="true"/>
                     </div>
-                    <label for="restore_me" class="register-form__checkbox-label">восстановить контент моего экаунта на новом сервисе freefeed.net + я согласен с условиями использования</label>
+                    <label for="restore_me" class="register-form__checkbox-label">восстановить контент моего экаунта на новом сервисе FreeFeed + я согласен с условиями использования</label>
                 </div>
 
                 <div class="register-form__submit-wrapper">
-                    <button class="register-form__submit" type="submit">Зарегистрироваться на<br/>freefeed.net</button>
+                    <button class="register-form__submit" type="submit">Зарегистрироваться на<br/>FreeFeed</button>
                 </div>
             </form>
         </div>
