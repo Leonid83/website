@@ -15,7 +15,7 @@
     "require": {
         "doctrine/dbal": "~2.5",
         "flint/tacker": "~0.4.2",
-        "friendsofsymfony/http-cache": "~1.3",
+        "guzzlehttp/guzzle": "~5.2",
         "hackzilla/password-generator": "~1.0.1",
         "monolog/monolog": "~1.13",
         "predis/service-provider": "~1.0.0",
@@ -29,6 +29,7 @@
 
     "autoload": {
         "psr-4": {
+            "Freefeed\\Clio\\": "src/Clio",
             "Freefeed\\Website\\": "src/Website",
             "Snc\\RedisBundle\\Session\\Storage\\Handler\\": "src/RedisSessions"
         }

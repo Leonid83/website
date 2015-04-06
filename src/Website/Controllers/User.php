@@ -124,10 +124,15 @@ class User
             return $app->render('register.twig', $data);
         }
 
+        $clio_api_token = null;
+
         if (strlen($remote_key) > 0) {
-            $clio_api_token = null;  // FIXME: request token from clio
-        } else {
-            $clio_api_token = null;
+            $api = new \Freefeed\Clio\Api($app->getSettings()['clio_api']);
+            $response = $api->auth($friendfeed_username, $remote_key);
+
+            if ($response['auth'] === true) {
+                $clio_api_token = $response['token'];
+            }
         }
 
         $uid = $user_model->register($freefeed_username, $friendfeed_username, $email, $clio_api_token, $backup_me, $restore_me);

@@ -6,6 +6,7 @@ session:
 debug: true
 db:
   master: {}
+clio_api: 'http://freefeed.net/api/'
 smtp:
   host: localhost
   port: 25
