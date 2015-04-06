@@ -2,6 +2,7 @@
 namespace Freefeed\Website\Controllers;
 
 
+use Freefeed\Clio\Api;
 use Freefeed\Website\Application;
 use Freefeed\Website\Models\EmailValidation;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
@@ -127,7 +128,7 @@ class User
         $clio_api_token = null;
 
         if (strlen($api_key) > 0) {
-            $api = new \Freefeed\Clio\Api($app->getSettings()['clio_api']);
+            $api = new Api($app->getSettings()['clio_api']);
             $response = $api->auth($friendfeed_username, $api_key);
 
             if ($response['auth'] === true) {
@@ -195,6 +196,16 @@ class User
         $user_model->setEmailValidatedAndPassword($uid, $hash);
 
         $user = $user_model->getAccountFields($uid);
+
+        if ($user['account_validated'] == 0) {
+            $api = new Api($app->getSettings()['clio_api']);
+            $match = $api->userEmailMatches($user['friendfeed_username'], $user['email']);
+
+            if ($match) {
+                $user_model->validateAccount($uid);
+                $user['account_validated'] = true;
+            }
+        }
 
         $body = $app->renderView('email/account_created.twig', [
             'username' => $user['freefeed_username'],

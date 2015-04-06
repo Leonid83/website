@@ -39,6 +39,15 @@ class User
         return $this->db->lastInsertId();
     }
 
+    public function validateAccount($uid)
+    {
+        $this->db->update(
+            'users',
+            ['account_validated' => true],
+            ['id' => $uid]
+        );
+    }
+
     public function setPassword($uid, $password_hash)
     {
         $this->db->update(
@@ -106,7 +115,7 @@ class User
      */
     public function getAccountFields($uid)
     {
-        $q = 'SELECT id, freefeed_username, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE id=?';
+        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status, account_validated FROM `users` WHERE id=?';
         $stmt = $this->db->executeQuery($q, [$uid]);
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -114,14 +123,14 @@ class User
 
     public function getAccountFieldsByUsername($username)
     {
-        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE freefeed_username=?';
+        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status, account_validated FROM `users` WHERE freefeed_username=?';
         $stmt = $this->db->executeQuery($q, [$username]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function getAccountFieldsByEmail($email)
     {
-        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE email=?';
+        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status, account_validated FROM `users` WHERE email=?';
         $stmt = $this->db->executeQuery($q, [$email]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }

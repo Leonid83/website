@@ -68,6 +68,27 @@ class Api
 
     /**
      * @param string $username
+     * @return boolean
+     */
+    public function userEmailMatches($username, $email)
+    {
+        $url = "{$username}/email.json?email=".urlencode($email);
+
+        $request = $this->client->createRequest('GET', $url);
+        $request->addHeader('Accept', 'application/json');
+
+        try {
+            $response = $this->client->send($request);
+            $json = json_decode($response->getBody()->getContents(), true);
+
+            return $json['match'];
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param string $username
      * @param string $remote_key
      * @return \GuzzleHttp\Message\FutureResponse|ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
      */
