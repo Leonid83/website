@@ -117,4 +117,11 @@ class User
         $stmt = $this->db->executeQuery($q, [$username]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function getAccountFieldsByEmail($email)
+    {
+        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE email=?';
+        $stmt = $this->db->executeQuery($q, [$email]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }

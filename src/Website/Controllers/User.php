@@ -29,7 +29,12 @@ class User
         }
 
         $user_model = new \Freefeed\Website\Models\User($app);
-        $data = $user_model->getAccountFieldsByUsername($username);
+
+        if (strpos($username, '@') !== false) {
+            $data = $user_model->getAccountFieldsByEmail($username);
+        } else {
+            $data = $user_model->getAccountFieldsByUsername($username);
+        }
 
         if (null === $data) {
             return $app->render('login.twig', ['error' => 'bad credentials']);
