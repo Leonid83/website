@@ -93,7 +93,7 @@ class User
         $friendfeed_username = trim($post->get('friendfeed_username', ''));
         $freefeed_username = trim($post->get('freefeed_username', $friendfeed_username));
 
-        $remote_key = trim($post->get('remote_key', ''));
+        $api_key = trim($post->get('api_key', ''));
         $backup_me = $post->getBoolean('backup_me');
         $restore_me = $post->getBoolean('restore_me');
 
@@ -109,7 +109,7 @@ class User
             $errors[] = ['field' => 'freefeed_username', 'message' => 'username is already claimed'];
         }
 
-        if (strlen($remote_key) === 0 and $backup_me) {
+        if (strlen($api_key) === 0 and $backup_me) {
             $errors[] = ['field' => 'backup_me', 'message' => 'we can not manage your backup, unless you provide API key'];
         }
 
@@ -126,9 +126,9 @@ class User
 
         $clio_api_token = null;
 
-        if (strlen($remote_key) > 0) {
+        if (strlen($api_key) > 0) {
             $api = new \Freefeed\Clio\Api($app->getSettings()['clio_api']);
-            $response = $api->auth($friendfeed_username, $remote_key);
+            $response = $api->auth($friendfeed_username, $api_key);
 
             if ($response['auth'] === true) {
                 $clio_api_token = $response['token'];
