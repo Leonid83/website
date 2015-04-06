@@ -38,6 +38,15 @@ class User
         return $this->db->lastInsertId();
     }
 
+    public function setPassword($uid, $password_hash)
+    {
+        $this->db->update(
+            'users',
+            ['password' => $password_hash],
+            ['id' => $uid]
+        );
+    }
+
     public function setEmailValidatedAndPassword($uid, $password_hash)
     {
         $this->db->update(
@@ -81,9 +90,16 @@ class User
      */
     public function getAccountFields($uid)
     {
-        $q = 'SELECT freefeed_username, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE id=?';
+        $q = 'SELECT id, freefeed_username, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE id=?';
         $stmt = $this->db->executeQuery($q, [$uid]);
 
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getAccountFieldsByUsername($username)
+    {
+        $q = 'SELECT id, freefeed_username, `password`, friendfeed_username, email, clio_api_token, backup_me, freefeed_status FROM `users` WHERE freefeed_username=?';
+        $stmt = $this->db->executeQuery($q, [$username]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 }

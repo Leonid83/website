@@ -3,6 +3,7 @@ namespace Freefeed\Website;
 
 
 use Freefeed\Website\Controllers\Dummy;
+use Freefeed\Website\Controllers\User;
 use Monolog\Logger;
 use Predis\Silex\ClientsServiceProvider as PredisProvider;
 use Silex\Application\MonologTrait;
@@ -130,7 +131,23 @@ class Application extends \Silex\Application
             return new Dummy();
         });
 
-        $this->get('/', 'controllers.dummy:landingAction');
+        $this['controllers.user'] = $this->share(function(){
+            return new User();
+        });
+
+        $this->get('/', 'controllers.dummy:landingAction')->bind('index');
         $this->get('/refuse', 'controllers.dummy:refuseAction');
+
+        $this->get('/login', 'controllers.user:loginAction')->bind('login');
+        $this->post('/login', 'controllers.user:loginPostAction')->bind('login_submit');
+    }
+
+
+    /**
+     * @return \Pimple
+     */
+    public function getSettings()
+    {
+        return $this->settings;
     }
 }
