@@ -132,6 +132,15 @@ class User
 
             if ($response['auth'] === true) {
                 $clio_api_token = $response['token'];
+            } else {
+                $data = [
+                    'email' => $email,
+                    'freefeed_username' => $freefeed_username,
+                    'friendfeed_username' => $friendfeed_username,
+                    'errors' => [['field' => 'remote_key', 'message' => 'remote key verification failed']],
+                ];
+
+                return $app->render('register.twig', $data);
             }
         }
 

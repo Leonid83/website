@@ -31,6 +31,7 @@ class User
             'friendfeed_username'   => $friendfeed_username,
             'email'                 => $email,
             'clio_api_token'        => $clio_api_token,
+            'account_validated'     => ($clio_api_token !== null),
             'backup_me'             => $backup_me,
             'freefeed_status'       => $restore_me ? 'in' : 'undecided'
         ]);
