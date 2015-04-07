@@ -135,4 +135,13 @@ class User
         $stmt = $this->db->executeQuery($q, [$email]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+
+    public function listUnvalidatedAccountsWithEmails()
+    {
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=0 AND `email_validated`=1';
+        $stmt = $this->db->executeQuery($q);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
