@@ -12,6 +12,14 @@
 
 {% block content %}
     <div class="content content_left">
+        {% if errors|length > 0 %}
+            <div>
+                {% for error in errors %}
+                    <p class="error"><b>{{ error.field }}:</b> {{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <h3>Как это работает?</h3>
         <p>Хотите быть полностью уверенными, что ваши данные (комментарии, посты, любой ваш контент) не будут выводиться на сервисе FreeFeed.net? Заполните форму справа и нажмите «Отказаться от freefeed.net».</p>
 
