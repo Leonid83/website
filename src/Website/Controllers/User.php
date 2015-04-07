@@ -160,6 +160,91 @@ class User
         return $app->redirect($app->path('registration_success'), Response::HTTP_SEE_OTHER);
     }
 
+    public function refuseAction(Application $app)
+    {
+        return $app->render('refuse.twig', ['errors' => []]);
+    }
+
+    public function refusePostAction(Application $app, Request $request)
+    {
+        $post = $request->request;
+
+        $errors = [];
+        $user_model = new \Freefeed\Website\Models\User($app);
+
+        $email = trim($post->get('email', ''));
+
+        if (strlen($email) === 0) {
+            $errors[] = ['field' => 'email', 'message' => 'email is required'];
+        } else {
+            if ($user_model->emailIsTaken($email)) {
+                $errors[] = ['field' => 'email' , 'message' => 'this email is already used'];
+            }
+        }
+
+        $friendfeed_username = trim($post->get('friendfeed_username', ''));
+
+        $api_key = trim($post->get('api_key', ''));
+
+        if (strlen($friendfeed_username) === 0) {
+            $errors[] = ['field' => 'friendfeed_username', 'message' => 'not given'];
+        } elseif ($user_model->friendfeedNameIsTaken($friendfeed_username)) {
+            $errors[] = ['field' => 'friendfeed_username', 'message' => 'username is already claimed'];
+        }
+
+        if (count($errors) > 0) {
+            $data = [
+                'email' => $email,
+                'friendfeed_username' => $friendfeed_username,
+                'errors' => $errors
+            ];
+
+            return $app->render('refuse.twig', $data);
+        }
+
+        $clio_api_token = null;
+
+        if (strlen($api_key) > 0) {
+            $api = new Api($app->getSettings()['clio_api']);
+            $response = $api->auth($friendfeed_username, $api_key);
+
+            if ($response['auth'] === true) {
+                $clio_api_token = $response['token'];
+            } else {
+                $data = [
+                    'email' => $email,
+                    'friendfeed_username' => $friendfeed_username,
+                    'errors' => [['field' => 'remote_key', 'message' => 'remote key verification failed']],
+                ];
+
+                return $app->render('refuse.twig', $data);
+            }
+        }
+
+        $uid = $user_model->registerRefusal($friendfeed_username, $email, $clio_api_token);
+
+        $validation_model = new EmailValidation($app);
+        $activation_secret = $validation_model->create($uid);
+
+        $body = $app->renderView('email/email_validation.twig', [
+            'username' => $friendfeed_username,
+            'activation_link' => $app->url('validate_email', ['secret' => $activation_secret]),
+        ]);
+
+        $message = new \Swift_Message('freefeed.net: email validation', $body, 'text/plain', 'utf-8');
+        $message->setFrom('freefeed.net@gmail.com');
+        $message->setTo($email);
+
+        $email_count = $app->mail($message);
+
+        if ($email_count === 0) {
+            $user_model->deleteById($uid);
+            return $app->abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'can not send email');
+        }
+
+        return $app->redirect($app->path('registration_success'), Response::HTTP_SEE_OTHER);
+    }
+
     public function registrationSuccessAction(Application $app)
     {
         return $app->render('registration_success.twig');

@@ -37,6 +37,20 @@ class User
         return $this->db->lastInsertId();
     }
 
+    public function registerRefusal($friendfeed_username, $email, $clio_api_token)
+    {
+        $this->db->insert('users', [
+            'friendfeed_username'   => $friendfeed_username,
+            'email'                 => $email,
+            'clio_api_token'        => $clio_api_token,
+            'account_validated'     => ($clio_api_token !== null),
+            'backup_me'             => false,
+            'freefeed_status'       => 'out'
+        ]);
+
+        return $this->db->lastInsertId();
+    }
+
     public function validateAccount($uid)
     {
         $this->db->update(
