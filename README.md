@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS `email_validation`;
 CREATE TABLE `users` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `friendfeed_username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-`freefeed_username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
 `password` char(60) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'bcrypt hash',
 `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
 `clio_api_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

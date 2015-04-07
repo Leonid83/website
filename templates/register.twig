@@ -31,14 +31,7 @@
                     <label for="friendfeed_username">Имя на friendfeed:</label>
                 </div>
                 <div class="register-form__field-wrapper">
-                    <input class="register-form__text-input" id="friendfeed_username" name="friendfeed_username" type="text" placeholder="friendfeed Username" value="{{ friendfeed_username|default('') }}" onblur="copy_to_freefeed();" />
-                </div>
-
-                <div class="register-form__label-wrapper">
-                    <label for="freefeed_username">Имя на FreeFeed:</label>
-                </div>
-                <div class="register-form__field-wrapper">
-                    <input class="register-form__text-input" id="freefeed_username" name="freefeed_username" type="text" placeholder="Freefeed Username" value="{{ freefeed_username|default('') }}"/>
+                    <input class="register-form__text-input" id="friendfeed_username" name="friendfeed_username" type="text" placeholder="friendfeed Username" value="{{ friendfeed_username|default('') }}" />
                 </div>
 
                 <div class="register-form__label-wrapper">
@@ -70,16 +63,6 @@
     </div>
 
     <script type="text/javascript">
-        function copy_to_freefeed()
-        {
-            var old = document.getElementById('friendfeed_username').value;
-            var target = document.getElementById('freefeed_username');
-
-            if (target.value === '') {
-                target.value = old;
-            }
-        }
-
         function check_backup()
         {
             var elt = document.getElementById('backup_me');

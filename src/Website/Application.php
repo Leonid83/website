@@ -158,7 +158,7 @@ class Application extends \Silex\Application
             }
 
             $request->attributes->set('_logged_in', $session->get('logged_in'));
-            $request->attributes->set('_username', $data['freefeed_username']);
+            $request->attributes->set('_username', $data['friendfeed_username']);
         });
 
 //        $this->get('/', 'controllers.dummy:landingAction')->bind('index');

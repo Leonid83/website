@@ -92,7 +92,6 @@ class User
         }
 
         $friendfeed_username = trim($post->get('friendfeed_username', ''));
-        $freefeed_username = trim($post->get('freefeed_username', $friendfeed_username));
 
         $api_key = trim($post->get('api_key', ''));
         $backup_me = $post->getBoolean('backup_me');
@@ -104,12 +103,6 @@ class User
             $errors[] = ['field' => 'friendfeed_username', 'message' => 'username is already claimed'];
         }
 
-        if (strlen($freefeed_username) === 0) {
-            $errors[] = ['field' => 'freefeed_username', 'message' => 'not given'];
-        } elseif ($user_model->freefeedNameIsTaken($freefeed_username)) {
-            $errors[] = ['field' => 'freefeed_username', 'message' => 'username is already claimed'];
-        }
-
         if (strlen($api_key) === 0 and $backup_me) {
             $errors[] = ['field' => 'backup_me', 'message' => 'we can not manage your backup, unless you provide API key'];
         }
@@ -117,7 +110,6 @@ class User
         if (count($errors) > 0) {
             $data = [
                 'email' => $email,
-                'freefeed_username' => $freefeed_username,
                 'friendfeed_username' => $friendfeed_username,
                 'errors' => $errors
             ];
@@ -136,7 +128,6 @@ class User
             } else {
                 $data = [
                     'email' => $email,
-                    'freefeed_username' => $freefeed_username,
                     'friendfeed_username' => $friendfeed_username,
                     'errors' => [['field' => 'remote_key', 'message' => 'remote key verification failed']],
                 ];
@@ -145,13 +136,13 @@ class User
             }
         }
 
-        $uid = $user_model->register($freefeed_username, $friendfeed_username, $email, $clio_api_token, $backup_me, $restore_me);
+        $uid = $user_model->register($friendfeed_username, $email, $clio_api_token, $backup_me, $restore_me);
 
         $validation_model = new EmailValidation($app);
         $activation_secret = $validation_model->create($uid);
 
         $body = $app->renderView('email/email_validation.twig', [
-            'username' => $freefeed_username,
+            'username' => $friendfeed_username,
             'activation_link' => $app->url('validate_email', ['secret' => $activation_secret]),
         ]);
 
@@ -208,7 +199,7 @@ class User
         }
 
         $body = $app->renderView('email/account_created.twig', [
-            'username' => $user['freefeed_username'],
+            'username' => $user['friendfeed_username'],
             'password' => $password,
             'login_link' => $app->url('login'),
         ]);
@@ -218,7 +209,7 @@ class User
         $email_count = $app->mail($message);
 
         $data = [
-            'username' => $user['freefeed_username'],
+            'username' => $user['friendfeed_username'],
             'password' => $email_count > 0 ? null : $password,
             'login_link' => $app->url('index'),
         ];
