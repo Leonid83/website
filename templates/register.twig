@@ -11,7 +11,7 @@
         {% endif %}
 
         <p>Если вы регистрировали свой email через direct'ы и уверены, что ваш аккаунт уже сохранён в Clio 2.0, то для регистрации достаточно указать email, имя вашего эккаунта на friendfeed и желаемое имя на FreeFeed.</p>
-        <p>Если вы дополнительно укажете API Key вашего эккаунта friendfeed, то этот сайт сможет запросить у Clio статус вашего архива и, сразу же, включить архивирование вашего фида если это ещё не сделано.</p>
+        <p>Если вы дополнительно укажете API Key вашего эккаунта friendfeed, то этот сайт сможет запросить у Clio статус вашего архива.</p>
         <p>Этот сайт ни при каких условиях <b>НЕ СОХРАНЯЕТ</b> API Key, а использует его только для разовой авторизации на сервисе Clio.</p>
     </div>
 
@@ -43,13 +43,6 @@
 
                 <div class="register-form__checkbox-container">
                     <div class="register-form__checkbox-wrapper">
-                        <input class="register-form__checkbox" id="backup_me" name="backup_me" type="checkbox" value="true" onclick="return check_backup();"/>
-                    </div>
-                    <label for="backup_me" class="register-form__checkbox-label">сделать бекап контента моего экаунта, используя сервис Clio 2.0</label>
-                </div>
-
-                <div class="register-form__checkbox-container">
-                    <div class="register-form__checkbox-wrapper">
                         <input class="register-form__checkbox" id="restore_me" name="restore_me" type="checkbox" value="true"/>
                     </div>
                     <label for="restore_me" class="register-form__checkbox-label">восстановить контент моего экаунта на новом сервисе FreeFeed</label>
@@ -61,24 +54,4 @@
             </form>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function check_backup()
-        {
-            var elt = document.getElementById('backup_me');
-            var api_key = document.getElementById('api_key').value;
-
-            if (elt.checked === false) {
-                return true;
-            }
-
-            if (api_key.length === 0) {
-                alert('Для работы с Clio 2.0 укажите пожалуйста Ключ API');
-                document.getElementById('api_key').focus();
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 {% endblock %}

@@ -13,7 +13,6 @@ CREATE TABLE `users` (
 `email_validated` tinyint(1) DEFAULT '0',
 `account_validated` tinyint(1) DEFAULT '0',
 `freefeed_status` enum('undecided','in','out') COLLATE utf8_unicode_ci DEFAULT NULL,
-`backup_me` tinyint(1) DEFAULT '0',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

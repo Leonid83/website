@@ -94,17 +94,12 @@ class User
         $friendfeed_username = trim($post->get('friendfeed_username', ''));
 
         $api_key = trim($post->get('api_key', ''));
-        $backup_me = $post->getBoolean('backup_me');
         $restore_me = $post->getBoolean('restore_me');
 
         if (strlen($friendfeed_username) === 0) {
             $errors[] = ['field' => 'friendfeed_username', 'message' => 'not given'];
         } elseif ($user_model->friendfeedNameIsTaken($friendfeed_username)) {
             $errors[] = ['field' => 'friendfeed_username', 'message' => 'username is already claimed'];
-        }
-
-        if (strlen($api_key) === 0 and $backup_me) {
-            $errors[] = ['field' => 'backup_me', 'message' => 'we can not manage your backup, unless you provide API key'];
         }
 
         if (count($errors) > 0) {
@@ -136,7 +131,7 @@ class User
             }
         }
 
-        $uid = $user_model->register($friendfeed_username, $email, $clio_api_token, $backup_me, $restore_me);
+        $uid = $user_model->register($friendfeed_username, $email, $clio_api_token, $restore_me);
 
         $validation_model = new EmailValidation($app);
         $activation_secret = $validation_model->create($uid);
