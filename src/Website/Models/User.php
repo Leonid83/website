@@ -116,7 +116,7 @@ class User
      */
     public function getAccountFields($uid)
     {
-        $q = 'SELECT id, `password`, friendfeed_username, email, clio_api_token, freefeed_status, account_validated FROM `users` WHERE id=?';
+        $q = 'SELECT id, `password`, friendfeed_username, email, clio_api_token, freefeed_status, account_validated, email_validated FROM `users` WHERE id=?';
         $stmt = $this->db->executeQuery($q, [$uid]);
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -124,14 +124,14 @@ class User
 
     public function getAccountFieldsByUsername($username)
     {
-        $q = 'SELECT id, `password`, friendfeed_username, email, clio_api_token, freefeed_status, account_validated FROM `users` WHERE friendfeed_username=?';
+        $q = 'SELECT id, `password`, friendfeed_username, email, clio_api_token, freefeed_status, account_validated, email_validated FROM `users` WHERE friendfeed_username=?';
         $stmt = $this->db->executeQuery($q, [$username]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function getAccountFieldsByEmail($email)
     {
-        $q = 'SELECT id, `password`, friendfeed_username, email, clio_api_token, freefeed_status, account_validated FROM `users` WHERE email=?';
+        $q = 'SELECT id, `password`, friendfeed_username, email, clio_api_token, freefeed_status, account_validated, email_validated FROM `users` WHERE email=?';
         $stmt = $this->db->executeQuery($q, [$email]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }

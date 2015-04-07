@@ -159,6 +159,7 @@ class Application extends \Silex\Application
 
             $request->attributes->set('_logged_in', $session->get('logged_in'));
             $request->attributes->set('_username', $data['friendfeed_username']);
+            $request->attributes->set('_user', $data);
         });
 
 //        $this->get('/', 'controllers.dummy:landingAction')->bind('index');
@@ -178,6 +179,8 @@ class Application extends \Silex\Application
         $this->get('/register/validate/{secret}', 'controllers.user:validateEmailAction')
             ->assert('secret', '\w{64}')
             ->bind('validate_email');
+
+        $this->get('/status', 'controllers.user:statusAction')->bind('status');
     }
 
 

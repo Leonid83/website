@@ -301,4 +301,33 @@ class User
 
         return $app->render('account_created.twig', $data);
     }
+
+    public function statusAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false) === false) {
+            return $app->redirect($app->path('login'));
+        }
+
+        $user = $request->attributes->get('_user', null);
+
+        if ($user === null) {
+            return $app->redirect($app->path('login'));
+        }
+
+        $data = [
+            'username' => $user['friendfeed_username'],
+            'email' => $user['email'],
+            'account_validated' => $user['account_validated'],
+            'freefeed_status' => $user['freefeed_status'],
+        ];
+
+        if ($user['clio_api_token']) {
+            $api = new Api($app->getSettings()['clio_api'], $user['clio_api_token']);
+
+            $data['clio_info'] = $api->userInfo($user['friendfeed_username']);
+            $data['clio_subscriptions'] = $api->userSubscriptions($user['friendfeed_username']);
+        }
+
+        return $app->render('status.twig', $data);
+    }
 }

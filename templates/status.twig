@@ -1,0 +1,43 @@
+{% extends '_base+structure.twig' %}
+
+{% block content %}
+    <div class="content content_left-wide">
+        <h2>Привет {{ username }},</h2>
+
+        {% if account_validated %}
+            <p>Мы знаем ваш емейл: <b>{{ email }}</b> (и сможем сообщить новости)</p>
+
+            {% if freefeed_status == 'in' %}
+                <p>Мы помним, что вы попросили восстановить ваш аккаунт на FreeFeed</p>
+            {% elseif freefeed_status == 'out' %}
+                <p>Мы помним, что вы попросили не восстановливать ваш аккаунт на FreeFeed</p>
+            {% else %}
+                <p>Вы не сообщили нам, желаете ли вы восстанавливать аккаунт на FreeFeed</p>
+            {% endif %}
+
+            {% if clio_info is defined %}
+                <p>Поскольку вы авторизовались через Remote Key мы также можем показать вам информацию из Clio:</p>
+
+                <h3>Ваш фид:</h3>
+                <p>{{ clio_info.fid }}: {{ clio_info.status }}</p>
+
+                <h3>Ваши подписки:</h3>
+                <ul>
+                    {% for record in clio_subscriptions if record.status == 'ready' %}
+                        <li>{{ record.fid }}: {{ record.status }}</li>
+                    {% endfor %}
+
+                    {% for record in clio_subscriptions if (record.status == 'processing' or record.status == 'requested') %}
+                        <li style="color: orange">{{ record.fid }}: {{ record.status }}</li>
+                    {% endfor %}
+
+                    {% for record in clio_subscriptions if (record.status == 'new' or record.status == 'error' or record.status == 'forbidden') %}
+                        <li class="error">{{ record.fid }}: {{ record.status }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% else %}
+            <p>К сожалению, мы не смогли валидировать ваш аккант в автоматическом режиме. Если вы можете доказать что этот аккаунт действительно принадлежит вам, то напишите нам, пожалуйста по адресу <a href="mailto:freefeed.net@gmail.com">freefeed.net@gmail.com</a> и мы постараемся разобраться в этой ситуации как можно быстрее.</p>
+        {% endif %}
+    </div>
+{% endblock %}
