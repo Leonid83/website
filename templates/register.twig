@@ -16,42 +16,48 @@
     </div>
 
     <div class="content content_right">
-        <p><span class="mini">Для того, что бы зарезервировать для себя имя на FreeFeed и перенести свои данные (комментарии, записи) с friendfeed на FreeFeed, заполните:</span></p>
+        {% if app.request.attributes.get('_logged_in') %}
+            <p><span class="mini">Вы уже авторизованы.</span></p>
+            <p>Здравствуйте {{ app.request.attributes.get('_username') }}!</p>
+            <p>Вы можете перейти к <a href="{{ path('status') }}">своей странице</a></p>
+        {% else %}
+            <p><span class="mini">Для того, что бы зарезервировать для себя имя на FreeFeed и перенести свои данные (комментарии, записи) с friendfeed на FreeFeed, заполните:</span></p>
 
-        <div class="register-form__wrapper">
-            <form class="register-form" action="{{ path('register_submit') }}" method="post">
-                <div  class="register-form__label-wrapper">
-                    <label for="email">Ваш контактный адрес:</label>
-                </div>
-                <div  class="register-form__field-wrapper">
-                    <input class="register-form__text-input" id="email" name="email" type="text" placeholder="Email" value="{{ email|default('') }}" />
-                </div>
-
-                <div class="register-form__label-wrapper">
-                    <label for="friendfeed_username">Имя на friendfeed:</label>
-                </div>
-                <div class="register-form__field-wrapper">
-                    <input class="register-form__text-input" id="friendfeed_username" name="friendfeed_username" type="text" placeholder="Username" value="{{ friendfeed_username|default('') }}" />
-                </div>
-
-                <div class="register-form__label-wrapper">
-                    <label for="api_key" title="Этот ключ используется разово, для привязки аккаунта. Мы не сохраняем его">Ключ API (<a href="https://friendfeed.com/account/api" target="_blank">где он?</a>):</label>
-                </div>
-                <div class="register-form__field-wrapper">
-                    <input class="register-form__text-input" id="api_key" name="api_key" type="password" placeholder="(optional) API key" title="Этот ключ используется разово, для привязки аккаунта. Мы не сохраняем его"/>
-                </div>
-
-                <div class="register-form__checkbox-container">
-                    <div class="register-form__checkbox-wrapper">
-                        <input class="register-form__checkbox" id="restore_me" name="restore_me" type="checkbox" value="true"/>
+            <div class="register-form__wrapper">
+                <form class="register-form" action="{{ path('register_submit') }}" method="post">
+                    <div  class="register-form__label-wrapper">
+                        <label for="email">Ваш контактный адрес:</label>
                     </div>
-                    <label for="restore_me" class="register-form__checkbox-label">восстановить контент моего экаунта на новом сервисе FreeFeed</label>
-                </div>
+                    <div  class="register-form__field-wrapper">
+                        <input class="register-form__text-input" id="email" name="email" type="text" placeholder="Email" value="{{ email|default('') }}" />
+                    </div>
 
-                <div class="register-form__submit-wrapper">
-                    <button class="register-form__submit" type="submit">Зарегистрироваться на<br/>FreeFeed</button>
-                </div>
-            </form>
-        </div>
+                    <div class="register-form__label-wrapper">
+                        <label for="friendfeed_username">Имя на friendfeed:</label>
+                    </div>
+                    <div class="register-form__field-wrapper">
+                        <input class="register-form__text-input" id="friendfeed_username" name="friendfeed_username" type="text" placeholder="Username" value="{{ friendfeed_username|default('') }}" />
+                    </div>
+
+                    <div class="register-form__label-wrapper">
+                        <label for="api_key" title="Этот ключ используется разово, для привязки аккаунта. Мы не сохраняем его">Ключ API (<a href="https://friendfeed.com/account/api" target="_blank">где он?</a>):</label>
+                    </div>
+                    <div class="register-form__field-wrapper">
+                        <input class="register-form__text-input" id="api_key" name="api_key" type="password" placeholder="(optional) API key" title="Этот ключ используется разово, для привязки аккаунта. Мы не сохраняем его"/>
+                    </div>
+
+                    <div class="register-form__checkbox-container">
+                        <div class="register-form__checkbox-wrapper">
+                            <input class="register-form__checkbox" id="restore_me" name="restore_me" type="checkbox" value="true"/>
+                        </div>
+                        <label for="restore_me" class="register-form__checkbox-label">восстановить контент моего экаунта на новом сервисе FreeFeed</label>
+                    </div>
+
+                    <div class="register-form__submit-wrapper">
+                        <button class="register-form__submit" type="submit">Зарегистрироваться на<br/>FreeFeed</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

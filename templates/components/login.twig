@@ -1,6 +1,7 @@
 {% if app.request.attributes.get('_logged_in') %}
     <p><span class="mini">Вы уже авторизованы.</span></p>
     <p>Здравствуйте {{ app.request.attributes.get('_username') }}!</p>
+    <p>Вы можете перейти к <a href="{{ path('status') }}">своей странице</a></p>
 {% else %}
     <p><span class="mini">Для того, что бы авторизоваться и воспользоваться сервисами freefeed.net, введите:</span></p>
     {% if error is defined %}

@@ -66,7 +66,7 @@ class User
         $session->set('user', $data['id']);
         $session->set('password', $data['password']); // stored, so we can remove old sessions
 
-        return $app->redirect($app->path('index'), Response::HTTP_SEE_OTHER);
+        return $app->redirect($app->path('status'), Response::HTTP_SEE_OTHER);
     }
 
     public function registerAction(Application $app)
