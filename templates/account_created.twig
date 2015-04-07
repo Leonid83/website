@@ -2,14 +2,14 @@
 
 {% block content %}
     <div class="content content_left">
-        <p>Your FreeFeed account is successfully activated.</p>
+        <p>Ваш временный аккаунт FreeFeed создан.</p>
 
         {% if password is not empty %}
-            <p>We tried to send you email with your new password, but something went wrong. So, we're showing you password now, instead.</p>
-            <p><b>password:</b> {{ password }}</p>
-            <p>We won't be showing it to you again, but you are free to change it whenever you want.</p>
+            <p>Мы пытались отправить вам емейл с паролем, но что-то пошло не так. Так что вместо этого, мы покажем вам пароль прямо сейчас.</p>
+            <p><b>пароль:</b> {{ password }}</p>
+            <p>Мы не сохраняем пароль в открытом виде и, поэтому, больше не сможем вам его показать. Сохраните его, позже вы сможете поменять его через интерфейс сайта.</p>
         {% else %}
-            <p>We sent you email with your password and further instructions.</p>
+            <p>Мы отправили вам емейл с паролем и дальнейшими инструкциями.</p>
         {% endif %}
     </div>
 
