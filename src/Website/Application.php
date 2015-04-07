@@ -164,7 +164,8 @@ class Application extends \Silex\Application
 //        $this->get('/', 'controllers.dummy:landingAction')->bind('index');
         $this->get('/', function(){ return $this->redirect($this->path('register')); })->bind('index');
 
-        $this->get('/refuse', 'controllers.dummy:refuseAction')->bind('refuse');
+        $this->get('/refuse', 'controllers.user:refuseAction')->bind('refuse');
+        $this->post('/refuse', 'controllers.user:refusePostAction')->bind('refuse_submit');
 
         $this->get('/login', 'controllers.user:loginAction')->bind('login');
         $this->post('/login', 'controllers.user:loginPostAction')->bind('login_submit');

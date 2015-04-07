@@ -172,6 +172,11 @@ class User
         $errors = [];
         $user_model = new \Freefeed\Website\Models\User($app);
 
+        $accept = $post->getBoolean('accept');
+        if (false === $accept) {
+            $errors[] = ['field' => 'accept', 'message' => 'Conditions are not accepted'];
+        }
+
         $email = trim($post->get('email', ''));
 
         if (strlen($email) === 0) {
