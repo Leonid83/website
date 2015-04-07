@@ -161,7 +161,9 @@ class Application extends \Silex\Application
             $request->attributes->set('_username', $data['freefeed_username']);
         });
 
-        $this->get('/', 'controllers.dummy:landingAction')->bind('index');
+//        $this->get('/', 'controllers.dummy:landingAction')->bind('index');
+        $this->get('/', function(){ return $this->redirect($this->path('register')); })->bind('index');
+
         $this->get('/refuse', 'controllers.dummy:refuseAction')->bind('refuse');
 
         $this->get('/login', 'controllers.user:loginAction')->bind('login');
