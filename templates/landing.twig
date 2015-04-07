@@ -17,52 +17,7 @@
 
     <div class="section section_white">
         <div class="section__wrapper">
-
-            <ul class="rainbow">
-
-                <li class="rainbow__item rainbow__item_l rainbow__item_yellow">
-                    <a href="{{ path('register') }}" title="FreeFeed — Foobar">
-                        <div class="rainbow__icon rainbow__icon_polaroid"></div>
-                        <div class="rainbow__caption">Архивация:<br/>Clio 2.0</div>
-                    </a>
-                </li>
-
-                <li class="rainbow__item rainbow__item_l rainbow__item_blue">
-                    <a href="{{ path('refuse') }}" title="FreeFeed — Foobar">
-                        <div class="rainbow__icon rainbow__icon_tap"></div>
-                        <div class="rainbow__caption">Отказаться от<br/>использования</div>
-                    </a>
-                </li>
-
-                <li class="rainbow__item rainbow__item_l rainbow__item_white">
-                    <a href="/" title="FreeFeed — Foobar">
-                        <div class="rainbow__icon rainbow__icon_office"></div>
-                        <div class="rainbow__caption">Условия<br/>использования<br/><span class="micro">(мелкий шрифт!)</span></div>
-                    </a>
-                </li>
-
-                <li class="rainbow__item rainbow__item_l rainbow__item_gray">
-                    <a href="/" title="FreeFeed — Foobar">
-                        <div class="rainbow__icon rainbow__icon_shout"></div>
-                        <div class="rainbow__caption">Процесс<br/>переезда</div>
-                    </a>
-                </li>
-
-                <li class="rainbow__item rainbow__item_l rainbow__item_magenta">
-                    <a href="/" title="FreeFeed — Foobar">
-                        <div class="rainbow__icon rainbow__icon_safe"></div>
-                        <div class="rainbow__caption">Куда нести<br/>деньги</div>
-                    </a>
-                </li>
-
-                <li class="rainbow__item rainbow__item_l rainbow__item_black">
-                    <a href="/" title="FreeFeed — Foobar">
-                        <div class="rainbow__icon rainbow__icon_gear"></div>
-                        <div class="rainbow__caption">Кнопочки<br/>и рычажки</div>
-                    </a>
-                </li>
-
-            </ul>
+            {% include 'components/top_menu.twig' %}
 
             <div style="height: 80px"></div>
 
