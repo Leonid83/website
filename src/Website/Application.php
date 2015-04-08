@@ -187,10 +187,28 @@ class Application extends \Silex\Application
 
         $this->get('/status', 'controllers.user:statusAction')->bind('status');
 
-        $this->get('/dash/in', 'controllers.dash:inAction');
-        $this->get('/dash/out', 'controllers.dash:outAction');
-        $this->get('/dash/unvalidated', 'controllers.dash:unvalidatedAction');
-        $this->get('/dash/unconfirmed', 'controllers.dash:unconfirmedAction');
+        $require_admin = function(Request $request) {
+            if (!$request->attributes->get('_logged_in', false)) {
+                return $this->redirect('index');
+            }
+
+            $username = $request->attributes->get('_username');
+            if (!in_array($username, $this->settings['admins'])) {
+                return $this->redirect('index');
+            }
+
+            return null;
+        };
+
+
+        $this->get('/dash/in', 'controllers.dash:inAction')
+            ->before($require_admin);
+        $this->get('/dash/out', 'controllers.dash:outAction')
+            ->before($require_admin);
+        $this->get('/dash/unvalidated', 'controllers.dash:unvalidatedAction')
+            ->before($require_admin);
+        $this->get('/dash/unconfirmed', 'controllers.dash:unconfirmedAction')
+            ->before($require_admin);
     }
 
 
