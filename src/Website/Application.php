@@ -189,7 +189,7 @@ class Application extends \Silex\Application
 
         $require_admin = function(Request $request) {
             if (!$request->attributes->get('_logged_in', false)) {
-                return $this->redirect('index');
+                return $this->redirect($this->path('index'));
             }
 
             $username = $request->attributes->get('_username');
