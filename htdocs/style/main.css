@@ -45,14 +45,20 @@ a:link {
 
 .header__site-title,
 .header__navigation {
-  top: 27px;
+  top: 0px;
+}
+
+/* Авторизационное */
+
+.login-logout {
+  line-height: 75px;
 }
 
 /*Header content*/
 
 .site-title {
   font-size: 1em;
-  margin: 0px;
+  line-height: 75px;
   font-weight: normal;
 }
 
