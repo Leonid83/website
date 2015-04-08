@@ -69,7 +69,6 @@ class Dashboard
             [
                 'title' => "Сами не знают чего хотят",
                 'users' => $this->model->listUndecidedAccounts(),
-                'show_emails' => true,
             ]
         );
     }
