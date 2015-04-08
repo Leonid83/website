@@ -43,8 +43,14 @@ a:link {
   right: 0px;
 }
 
+.header__central-link {
+  position: absolute;
+  left: 400px;
+}
+
 .header__site-title,
-.header__navigation {
+.header__navigation,
+.header__central-link {
   top: 30px;
 }
 
