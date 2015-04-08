@@ -8,17 +8,18 @@
     </div>
 
     <div class="section section_silver">
-        <div class="section__wrapper h180">
+        <div class="section__wrapper h65">
             {% set _menu_size = 's' %}
             {% include 'components/top_menu.twig' %}
         </div>
     </div>
 
+    <!-- this may contain 'spacer' div, see `refuse.twig` -->
     {% block before_content %}
     {% endblock %}
 
     <div class="section section_silver">
-        <div class="section__wrapper" style="padding-top: 25px;">
+        <div class="section__wrapper">
             {% block content %}{% endblock %}
 
             <div class="clear"></div>

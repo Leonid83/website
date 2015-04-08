@@ -45,20 +45,14 @@ a:link {
 
 .header__site-title,
 .header__navigation {
-  top: 0px;
+  top: 30px;
 }
 
-/* Авторизационное */
-
-.login-logout {
-  line-height: 75px;
-}
-
-/*Header content*/
-
+/* site header*/
 .site-title {
   font-size: 1em;
-  line-height: 75px;
+  line-height: 1em;
+  margin: 0;
   font-weight: normal;
 }
 
@@ -74,7 +68,19 @@ a:link {
   text-decoration: underline;
 }
 
+/* dev status message*/
 
+.dev-status {
+  font-size: 0.8em;
+  line-height: 1.3em;
+  text-align: center;
+}
+
+.dev-status p {
+  margin: 0.4em 0;
+}
+
+/* большой и красивый заголовок с интро */
 .intro-heading {
     text-align: center;
     color: white;
@@ -90,7 +96,6 @@ a:link {
 }
 
 /* page header — icon, title, subtitle */
-
 .page-icon {
   width: 128px;
   height: 128px;
@@ -149,7 +154,7 @@ a:link {
 }
 
 .section_silver {
-  background-color: rgb(249, 249, 249);
+  background-color: #eee;
 }
 
 .section_image-background {
@@ -201,7 +206,7 @@ a:link {
     background-repeat: no-repeat;
   
     vertical-align: top;
-}
+  }
 
   .rainbow__item:last-child {
     margin: 0;
@@ -289,67 +294,67 @@ a:link {
   margin-right: 8px;
 }
 
-      .rainbow__icon_polaroid {
-        background-image: url(../i/polaroid.png);
-      }
+.rainbow__icon_polaroid {
+  background-image: url(../i/polaroid.png);
+}
 
-      .rainbow__icon_tap {
-        background-image: url(../i/tap.png);
-      }
+.rainbow__icon_tap {
+  background-image: url(../i/tap.png);
+}
 
-      .rainbow__icon_office {
-        background-image: url(../i/office.png);
-      }
+.rainbow__icon_office {
+  background-image: url(../i/office.png);
+}
 
-      .rainbow__icon_shout {
-        background-image: url(../i/shout.png);
-      }
+.rainbow__icon_shout {
+  background-image: url(../i/shout.png);
+}
 
-      .rainbow__icon_safe {
-        background-image: url(../i/safe.png);
-      }
+.rainbow__icon_safe {
+  background-image: url(../i/safe.png);
+}
 
-      .rainbow__icon_gear {
-        background-image: url(../i/gear.png);
-      }
+.rainbow__icon_gear {
+  background-image: url(../i/gear.png);
+}
 
-  .rainbow__item a:link {
-    text-decoration: none;
-  }
+.rainbow__item a:link {
+  text-decoration: none;
+}
 
-  .rainbow__item_yellow a:link,
-  .rainbow__item_blue a:link,
-  .rainbow__item_white a:link,
-  .rainbow__item_yellow a:visited,
-  .rainbow__item_blue a:visited,
-  .rainbow__item_white a:visited {
-    color: black;
-  }
+.rainbow__item_yellow a:link,
+.rainbow__item_blue a:link,
+.rainbow__item_white a:link,
+.rainbow__item_yellow a:visited,
+.rainbow__item_blue a:visited,
+.rainbow__item_white a:visited {
+  color: black;
+}
 
-  .rainbow__item_gray a:link,
-  .rainbow__item_magenta a:link,
-  .rainbow__item_black a:link,
-  .rainbow__item_gray a:visited,
-  .rainbow__item_magenta a:visited,
-  .rainbow__item_black a:visited {
-    color: white;
-  }
+.rainbow__item_gray a:link,
+.rainbow__item_magenta a:link,
+.rainbow__item_black a:link,
+.rainbow__item_gray a:visited,
+.rainbow__item_magenta a:visited,
+.rainbow__item_black a:visited {
+  color: white;
+}
 
-  .rainbow__item a:hover .rainbow__caption {
-    text-decoration: underline;
-  }
+.rainbow__item a:hover .rainbow__caption {
+  text-decoration: underline;
+}
 
-  .rainbow__caption {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 1.2em;
-  }
+.rainbow__caption {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.2em;
+}
 
-  .rainbow__item_s .rainbow__caption {
-    font-size: 0.7em;
-  }
+.rainbow__item_s .rainbow__caption {
+  font-size: 0.7em;
+}
 
-/*content - блокиконтента*/
+/*content - блоки контента*/
 
 /* text content */
 .content {
@@ -395,7 +400,7 @@ a:link {
   padding: 0px;
 }
 
-/* opt0out form*/
+/* opt-out form*/
 
 .opt-out-form__wrapper {
     width: 200px;
@@ -420,18 +425,11 @@ a:link {
 .opt-out-form__checkbox-wrapper {
   float: left;
   margin-right: -20px;
-  /* height: 50px; */
-  /* line-height: 50px; */
 }
 
 .opt-out-form__checkbox {
-  /* vertical-align: bottom; */ 
   display: inline-block;
-  /* margin: 10px 10px 10px 0; */
   margin-left: 0px;
-  /* width: 20px; */
-  /* background: blue; */
-  /* border: 1px solid red; */
   height:  20px;
 }
 
@@ -456,7 +454,6 @@ a:link {
 }
 
 /* login form */
-
 .login-form__wrapper {
   width: 200px;
   margin: 32px auto;
@@ -480,19 +477,11 @@ a:link {
 .login-form__checkbox-wrapper {
   float: left;
   margin-right: -20px;
-  /* height: 50px; */
-  /* line-height: 50px; */
 }
 
 .login-form__checkbox {
-  /* vertical-align: bottom; */
   display: inline-block;
-  /* margin: 10px 10px 10px 0; */
   margin-left: 0px;
-  /* width: 20px; */
-  /* background: blue; */
-  /* border: 1px solid red; */
-  /*height:  20px;*/
 }
 
 .login-form__checkbox-label {
@@ -539,18 +528,11 @@ a:link {
 .register-form__checkbox-wrapper {
   float: left;
   margin-right: -20px;
-  /* height: 50px; */
-  /* line-height: 50px; */
 }
 
 .register-form__checkbox {
-  /* vertical-align: bottom; */
   display: inline-block;
-  /* margin: 10px 10px 10px 0; */
   margin-left: 0px;
-  /* width: 20px; */
-  /* background: blue; */
-  /* border: 1px solid red; */
   height:  20px;
 }
 
@@ -587,9 +569,9 @@ a:link {
   border-bottom: 2px solid rgb(249, 249, 249);
 }
 
-  .sidenav__item:last-child {
-    border: none;
-  }
+.sidenav__item:last-child {
+  border: none;
+}
 
 .sidenav__item_active {
   background-color: #f5f2e9;
@@ -836,5 +818,11 @@ a:link {
 .h180 {
   height: 180px;
 }
-/*========*/
 
+.h140 {
+  height: 140px;
+}
+
+.h65 {
+  height: 65px;
+}
