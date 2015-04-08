@@ -194,7 +194,7 @@ class Application extends \Silex\Application
 
             $username = $request->attributes->get('_username');
             if (!in_array($username, $this->settings['admins'])) {
-                return $this->redirect('index');
+                return $this->redirect($this->path('index'));
             }
 
             return null;
