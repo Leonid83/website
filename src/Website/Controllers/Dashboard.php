@@ -45,6 +45,7 @@ class Dashboard
             [
                 'title' => "Неподтверждённые аккаунты",
                 'users' => $this->model->listUnvalidatedAccountsWithEmails(),
+                'show_emails' => true,
             ]
         );
     }
@@ -56,6 +57,18 @@ class Dashboard
             [
                 'title' => "Неподтверждённые емейлы",
                 'users' => $this->model->listUnconfirmedAccounts(),
+                'show_emails' => true,
+            ]
+        );
+    }
+
+    public function undecidedAction()
+    {
+        return $this->app->render(
+            'dashboard.twig',
+            [
+                'title' => "Сами не знают чего хотят",
+                'users' => $this->model->listUndecidedAccounts(),
                 'show_emails' => true,
             ]
         );

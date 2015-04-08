@@ -168,4 +168,12 @@ class User
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function listUndecidedAccounts()
+    {
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="undecided" ORDER BY `friendfeed_username`';
+        $stmt = $this->db->executeQuery($q);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

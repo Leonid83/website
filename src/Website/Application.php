@@ -211,6 +211,8 @@ class Application extends \Silex\Application
             ->before($require_admin);
         $this->get('/dash/unconfirmed', 'controllers.dash:unconfirmedAction')
             ->before($require_admin);
+        $this->get('/dash/undecided', 'controllers.dash:undecidedAction')
+            ->before($require_admin);
     }
 
 
