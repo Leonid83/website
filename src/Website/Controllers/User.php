@@ -256,7 +256,8 @@ class User
         $uid = $validation_model->validate($secret);
 
         if (false === $uid) {
-            $app->abort(Response::HTTP_NOT_FOUND);
+            $response = new Response('', Response::HTTP_NOT_FOUND);
+            return $app->render('err_unknown_validation.twig', $response);
         }
 
         $generator = new ComputerPasswordGenerator();
