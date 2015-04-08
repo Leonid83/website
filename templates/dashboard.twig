@@ -7,7 +7,12 @@
         <p>Всего: {{ users|length }}</p>
         <ul>
             {% for user in users %}
-                <li>{{ user.friendfeed_username }}</li>
+                <li>
+                    {{ user.friendfeed_username }}
+                    {% if show_emails is defined %}
+                        <span style="color:gray">{{ user.email }}</span>
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
     </div>

@@ -145,6 +145,14 @@ class User
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function listUnconfirmedAccounts()
+    {
+        $q = 'SELECT * FROM `users` WHERE `email_validated`=0 ORDER BY `friendfeed_username`';
+        $stmt = $this->db->executeQuery($q);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function listOptinAccounts()
     {
         $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="in" ORDER BY `friendfeed_username`';

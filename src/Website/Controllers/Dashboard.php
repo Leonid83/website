@@ -51,5 +51,13 @@ class Dashboard
 
     public function unconfirmedAction()
     {
+        return $this->app->render(
+            'dashboard.twig',
+            [
+                'title' => "Неподтверждённые емейлы",
+                'users' => $this->model->listUnconfirmedAccounts(),
+                'show_emails' => true,
+            ]
+        );
     }
 }
