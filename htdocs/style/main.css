@@ -45,13 +45,14 @@ a:link {
 
 .header__site-title,
 .header__navigation {
-  top: 11px;
+  top: 27px;
 }
 
 /*Header content*/
 
 .site-title {
   font-size: 1em;
+  margin: 0px;
   font-weight: normal;
 }
 
