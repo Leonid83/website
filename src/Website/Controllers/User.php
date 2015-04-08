@@ -297,7 +297,7 @@ class User
         $data = [
             'username' => $user['friendfeed_username'],
             'password' => $email_count > 0 ? null : $password,
-            'login_link' => $app->url('index'),
+            'login_link' => $app->url('login'),
         ];
 
         return $app->render('account_created.twig', $data);
