@@ -6,6 +6,7 @@ use Freefeed\Clio\Api;
 use Freefeed\Website\Application;
 use Freefeed\Website\Models\EmailValidation;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -127,18 +128,24 @@ class User
 
         if (strlen($api_key) > 0) {
             $api = new Api($app->getSettings()['clio_api']);
-            $response = $api->auth($friendfeed_username, $api_key);
 
-            if ($response['auth'] === true) {
-                $clio_api_token = $response['token'];
-            } else {
-                $data = [
-                    'email' => $email,
-                    'friendfeed_username' => $friendfeed_username,
-                    'errors' => [['field' => 'remote_key', 'message' => 'remote key verification failed']],
-                ];
+            try {
+                $response = $api->auth($friendfeed_username, $api_key);
 
-                return $app->render('register.twig', $data);
+                if ($response['auth'] === true) {
+                    $clio_api_token = $response['token'];
+                } else {
+                    $data = [
+                        'email' => $email,
+                        'friendfeed_username' => $friendfeed_username,
+                        'errors' => [['field' => 'remote_key', 'message' => 'remote key verification failed']],
+                    ];
+
+                    return $app->render('register.twig', $data);
+                }
+            } catch (\GuzzleHttp\Exception\ServerException $e) {
+                $app->log('got exception from clio/api/auth', ['body' => $e->getResponse()->getBody()], Logger::WARNING);
+                throw $e;
             }
         }
 
