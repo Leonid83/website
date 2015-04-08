@@ -139,7 +139,7 @@ class User
 
     public function listUnvalidatedAccountsWithEmails()
     {
-        $q = 'SELECT * FROM `users` WHERE `account_validated`=0 AND `email_validated`=1';
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=0 AND `email_validated`=1 ORDER BY `friendfeed_username`';
         $stmt = $this->db->executeQuery($q);
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -147,7 +147,7 @@ class User
 
     public function listOptinAccounts()
     {
-        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="in"';
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="in" ORDER BY `friendfeed_username`';
         $stmt = $this->db->executeQuery($q);
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -155,7 +155,7 @@ class User
 
     public function listOptoutAccounts()
     {
-        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="out"';
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="out" ORDER BY `friendfeed_username`';
         $stmt = $this->db->executeQuery($q);
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
