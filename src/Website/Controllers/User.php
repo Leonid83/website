@@ -69,6 +69,17 @@ class User
         return $app->redirect($app->path('status'), Response::HTTP_SEE_OTHER);
     }
 
+    public function logoutPostAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false)) {
+            /** @var SessionInterface $session */
+            $session = $app['session'];
+            $session->clear();
+        }
+
+        return $app->redirect($app->path('index'), Response::HTTP_SEE_OTHER);
+    }
+
     public function registerAction(Application $app)
     {
         return $app->render('register.twig', ['errors' => []]);

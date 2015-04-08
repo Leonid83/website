@@ -176,6 +176,8 @@ class Application extends \Silex\Application
         $this->get('/login', 'controllers.user:loginAction')->bind('login');
         $this->post('/login', 'controllers.user:loginPostAction')->bind('login_submit');
 
+        $this->post('/logout', 'controllers.user:logoutPostAction')->bind('logout_submit');
+
         $this->get('/register', 'controllers.user:registerAction')->bind('register');
         $this->post('/register', 'controllers.user:registerPostAction')->bind('register_submit');
 

@@ -15,9 +15,16 @@
                     <a class="site-title__link" href="/">FreeFeed.net</a>
                 </h1>
             </div>
+
             <div class="header__navigation">
                 <div class="login-logout">
-                    <button>Батон</button> <a href="#">Линька</a>
+                    {% if app.request.attributes.get('_logged_in') %}
+                        <form action="{{ path('logout_submit') }}" method="post">
+                            <button type="submit">Выход</button>
+                        </form>
+                    {% else %}
+                        <a href="{{ path('login') }}">Вход</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
