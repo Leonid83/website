@@ -144,4 +144,20 @@ class User
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function listOptinAccounts()
+    {
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="in"';
+        $stmt = $this->db->executeQuery($q);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function listOptoutAccounts()
+    {
+        $q = 'SELECT * FROM `users` WHERE `account_validated`=1 AND `freefeed_status`="out"';
+        $stmt = $this->db->executeQuery($q);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

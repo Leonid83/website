@@ -2,6 +2,7 @@
 namespace Freefeed\Website;
 
 
+use Freefeed\Website\Controllers\Dashboard;
 use Freefeed\Website\Controllers\Dummy;
 use Freefeed\Website\Controllers\User;
 use Monolog\Logger;
@@ -137,6 +138,10 @@ class Application extends \Silex\Application
             return new User();
         });
 
+        $this['controllers.dash'] = $this->share(function(){
+            return new Dashboard($this);
+        });
+
         $this->before(function(Request $request) {
             if (!$request->cookies->has($this->settings['session']['cookie_name'])) {
                 $request->attributes->set('_logged_in', false);
@@ -181,6 +186,10 @@ class Application extends \Silex\Application
             ->bind('validate_email');
 
         $this->get('/status', 'controllers.user:statusAction')->bind('status');
+
+        $this->get('/dash/in', 'controllers.dash:in');
+        $this->get('/dash/out', 'controllers.dash:out');
+        $this->get('/dash/unvalidated', 'controllers.dash:unvalidated');
     }
 
 
