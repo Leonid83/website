@@ -257,7 +257,7 @@ class User
 
         if (false === $uid) {
             $response = new Response('', Response::HTTP_NOT_FOUND);
-            return $app->render('err_unknown_validation.twig', $response);
+            return $app->render('err_unknown_validation.twig', [], $response);
         }
 
         $generator = new ComputerPasswordGenerator();
