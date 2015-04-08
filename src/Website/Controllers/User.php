@@ -144,7 +144,7 @@ class User
                     return $app->render('register.twig', $data);
                 }
             } catch (\GuzzleHttp\Exception\ServerException $e) {
-                $app->log('got exception from clio/api/auth', ['body' => $e->getResponse()->getBody()], Logger::WARNING);
+                $app->log('got exception from clio/api/auth', ['body' => $e->getResponse()->getBody()->getContents()], Logger::WARNING);
                 throw $e;
             }
         }
