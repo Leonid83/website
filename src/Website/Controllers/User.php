@@ -300,7 +300,7 @@ class User
             'password' => $password,
             'login_link' => $app->url('login'),
         ]);
-        $message = new \Swift_Message('freefeed.net: account created', $body, 'text/plain', 'utf-8');
+        $message = new \Swift_Message('freefeed.net: account password is created', $body, 'text/plain', 'utf-8');
         $message->setFrom('freefeed.net@gmail.com', 'FreeFeed');
         $message->setTo($user['email']);
         $email_count = $app->mail($message);
