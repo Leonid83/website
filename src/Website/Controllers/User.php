@@ -153,7 +153,7 @@ class User
         ]);
 
         $message = new \Swift_Message('freefeed.net: email validation', $body, 'text/plain', 'utf-8');
-        $message->setFrom('freefeed.net@gmail.com');
+        $message->setFrom('freefeed.net@gmail.com', 'FreeFeed');
         $message->setTo($email);
 
         $email_count = $app->mail($message);
@@ -300,8 +300,8 @@ class User
             'password' => $password,
             'login_link' => $app->url('login'),
         ]);
-        $message = new \Swift_Message('feeefeed.net: account created', $body, 'text/plain', 'utf-8');
-        $message->setFrom('freefeed.net@gmail.com');
+        $message = new \Swift_Message('freefeed.net: account created', $body, 'text/plain', 'utf-8');
+        $message->setFrom('freefeed.net@gmail.com', 'FreeFeed');
         $message->setTo($user['email']);
         $email_count = $app->mail($message);
 
