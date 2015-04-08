@@ -190,6 +190,7 @@ class Application extends \Silex\Application
         $this->get('/dash/in', 'controllers.dash:inAction');
         $this->get('/dash/out', 'controllers.dash:outAction');
         $this->get('/dash/unvalidated', 'controllers.dash:unvalidatedAction');
+        $this->get('/dash/unconfirmed', 'controllers.dash:unconfirmedAction');
     }
 
 
