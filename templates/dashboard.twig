@@ -10,7 +10,7 @@
                 <li>
                     {{ user.friendfeed_username }}
                     {% if show_emails is defined %}
-                        <span style="color:gray">{{ user.email }}</span>
+                        <span style="color: lightgray">&lt;{{ user.email }}&gt;</span>
                     {% endif %}
                 </li>
             {% endfor %}
