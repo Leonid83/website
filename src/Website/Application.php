@@ -187,9 +187,9 @@ class Application extends \Silex\Application
 
         $this->get('/status', 'controllers.user:statusAction')->bind('status');
 
-        $this->get('/dash/in', 'controllers.dash:in');
-        $this->get('/dash/out', 'controllers.dash:out');
-        $this->get('/dash/unvalidated', 'controllers.dash:unvalidated');
+        $this->get('/dash/in', 'controllers.dash:inAction');
+        $this->get('/dash/out', 'controllers.dash:outAction');
+        $this->get('/dash/unvalidated', 'controllers.dash:unvalidatedAction');
     }
 
 
