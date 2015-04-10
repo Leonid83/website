@@ -142,6 +142,14 @@ class Application extends \Silex\Application
             return new Dashboard($this);
         });
 
+        $this['dev_status'] = $this->share(function(){
+            $path = "{$this->root}/htdocs/status.txt";
+            if (!file_exists($path)) {
+                return '';
+            }
+            return file_get_contents($path);
+        });
+
         $this->before(function(Request $request) {
             if (!$request->cookies->has($this->settings['session']['cookie_name'])) {
                 $request->attributes->set('_logged_in', false);
