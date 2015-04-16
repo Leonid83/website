@@ -1,0 +1,28 @@
+{% extends '_base+structure.twig' %}
+
+{% block content %}
+    <div class="content content_left">
+        <p>Это сайт, сопровождающий <a href="{{ path('moving') }}">процесс переезда</a> сообщества ru_friendfeed во FreeFeed. Сейчас с его помощью вы можете:</p>
+        <ul>
+            <li>Подтвердить права на привычный @username и архив своего фида (для этого надо лишь зарегистироваться, используя форму справа).</li>
+            <li><a href="{{ path('refuse') }}">Отказаться от использования FreeFeed</a>.</li>
+            <li><a href="{{ path('moving') }}">Узнать ближайшее будущее FreeFeed</a>.</li>
+            <li>Приблизить вместе с нами светлое, не накрытое фейсбучной тенью, будущее. Хотите помочь общему делу? Пишите на <a href="mailto:freefeed.net@gmail.com?subject=Хочу%20помогать">freefeed.net@gmail.com</a> с темой “Хочу помогать” и перечислением, что вы умеете и готовы делать.</li>
+        </ul>
+
+        <p>Сейчас сильнее всего требуются люди, которые знают:</p>
+        <ul>
+            <li>JavaScript</li>
+            <li>Node.js</li>
+            <li>Gherkin/Cucumber</li>
+        </ul>
+
+        <p>Люди, которые умеют писать тексты, тоже нужны! Желательно на английском, но пригодятся и русскоязычные тексты (у нас есть переводчики). А еще мы ждем любопытствующих тестировщиков (специальные технознания тут не требуются).</p>
+
+        <p>Еще у нас есть <a href="https://twitter.com/freefeednet">статусный twitter</a>, <a href="https://www.facebook.com/groups/friendfeedik/">группа на Facebook</a> и <a href="http://news.freefeed.net/">ностальгическая стенгазета</a>. Подпишитесь на них, чтобы сразу узнавать все новости FreeFeed (самые важные новости мы будем неспешно доставлять на ваш email… если, конечно, вы зарегистрировались).</p>
+    </div>
+
+    <div class="content content_right">
+        {% include 'components/register_on_index.twig' %}
+    </div>
+{% endblock %}

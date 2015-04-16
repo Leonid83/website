@@ -1,0 +1,6 @@
+{% extends 'components/register.twig' %}
+
+{% block registration_text %}
+    350 человек уже воспользовались этой формой и перенесли свой @username во Freefeed. Если вы этого не сделали, сделайте сейчас! (
+    <a href="{{ path('register') }}">подробности</a>)
+{% endblock %}

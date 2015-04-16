@@ -10,60 +10,15 @@
             </div>
         {% endif %}
 
-        <h1>Привет!</h1>
-        <p>Это первые тестовые страницы сайта, с помощью которого мы будем перемещаться из friendfeed во FreeFeed. Тут пока ничего не работает (включая все рубрики меню), а позвали мы вас по двум причинам.</p>
-        <p><strong>1.</strong> Здесь уже можно и нужно зарегистрироваться во FreeFeed. Самого FreeFeed еще нет, но регистрироваться уже пора, последнее цунами близко!</p>
-        <p>Если вы присылали нам свой email и уверены, что ваш аккаунт уже сохранён в <a href="/clio/">Clio 2.0</a>, то для регистрации достаточно указать email и имя вашего аккаунта на friendfeed. Сделайте это, пожалуйста, форма — справа. Что-то не работает?  Напишите скорее Алексею на <a href="mailto:indeyets@gmail.com">indeyets@gmail.com</a>, он починит. </p>
-        <p>Если вы дополнительно укажете API Key вашего аккаунта friendfeed, то этот сайт сможет запросить у <a href="/clio/">Clio</a> статус вашего архива (ключ для наших роботов — также и дополнительный способ подтверждения, что вы — это вы) и архивов людей, на которых вы подписаны.</p>
-        <p>Этот сайт ни при каких условиях <strong>НЕ СОХРАНЯЕТ</strong> API Key, а использует его только для разовой авторизации на сервисе <a href="/clio/">Clio</a>.</p>
-        <p>У нас пока нет финальной версии «условий использования FreeFeed.net». Регистрируясь, вы соглашаетесь с тем, что когда эти условия будут сформулированы  (мы об этом сообщим), вы должны будете в явной форме (например, поставив отметку в настройках аккаунта) согласиться или не согласиться с ними. А до этого момента ваш аккаунт во FreeFeed будет считаться «временным демо-доступом» (это относится к 100% пользователей).</p>
-        <p><strong>2.</strong> Здесь также можно — за те немногочисленные часы, что остались френдфиду — <a href="{{ path('refuse') }}">отказаться от использования FreeFeed</a>. </p>
-        <p>Каким бы ни было ваше решение, просим заполнить одну из форм поскорее. Тогда мы и ошибки рег. формы быстрее отловим, и легче-быстрее поймём, что никто не остался за бортом.</p>
+        <p>Если вы присылали нам свой email френдфидовским директом, то для валидации вашего @username достаточно указать email и имя вашего аккаунта на friendfeed. </p>
+        <p>Если же вы не присылали нам идентификационный емейл, но использовали для архивации <a href="/clio/"Clio 2.0</a>, то вы можете валидироваться с использованием email, имени аккаунта и remote key.</p>
+        <p>Сделайте это, пожалуйста. Форма — справа. Что-то не работает? Напишите скорее Алексею на <a href="mailto:indeyets@gmail.com">indeyets@gmail.com</a>, он починит.</p>
+        <p>У нас пока нет финальной версии «условий использования FreeFeed.net». Регистрируясь, вы соглашаетесь с тем, что, когда эти условия будут сформулированы (мы об этом сообщим), вы должны будете в явной форме (например, поставив отметку в настройках аккаунта) согласиться или не согласиться с ними.</p>
+        <p>А до этого момента ваш аккаунт во FreeFeed будет считаться «временным демо-доступом» (это относится к 100% пользователей).</p>
+        <p><b>ALERT:</b> если вы не зарегистрируетесь (и соответственно, не дадите нам адреса email), мы не сможем присылать вам новости про открытие и развитие FreeFeed.</p>
     </div>
 
     <div class="content content_right">
-        {% if app.request.attributes.get('_logged_in') %}
-            <p><span class="mini">Вы уже авторизованы.</span></p>
-            <p>Здравствуйте {{ app.request.attributes.get('_username') }}!</p>
-            <p>Вы можете перейти к <a href="{{ path('status') }}">своей странице</a></p>
-        {% else %}
-            <p><span class="mini">Для того, что бы зарезервировать для себя имя на FreeFeed и перенести свои данные (комментарии, записи) с friendfeed на FreeFeed, заполните:</span></p>
-
-            <div class="register-form__wrapper">
-                <form class="register-form" action="{{ path('register_submit') }}" method="post">
-                    <div  class="register-form__label-wrapper">
-                        <label for="email">Ваш контактный адрес:</label>
-                    </div>
-                    <div  class="register-form__field-wrapper">
-                        <input class="register-form__text-input" id="email" name="email" type="text" placeholder="Email" value="{{ email|default('') }}" />
-                    </div>
-
-                    <div class="register-form__label-wrapper">
-                        <label for="friendfeed_username">Имя на friendfeed:</label>
-                    </div>
-                    <div class="register-form__field-wrapper">
-                        <input class="register-form__text-input" id="friendfeed_username" name="friendfeed_username" type="text" placeholder="Username" value="{{ friendfeed_username|default('') }}" />
-                    </div>
-
-                    <div class="register-form__label-wrapper">
-                        <label for="api_key" title="Этот ключ используется разово, для привязки аккаунта. Мы не сохраняем его">Ключ API (<a href="https://friendfeed.com/account/api" target="_blank">где он?</a>):</label>
-                    </div>
-                    <div class="register-form__field-wrapper">
-                        <input class="register-form__text-input" id="api_key" name="api_key" type="text" placeholder="(optional) API key" title="Этот ключ используется разово, для привязки аккаунта. Мы не сохраняем его"/>
-                    </div>
-
-                    <div class="register-form__checkbox-container">
-                        <div class="register-form__checkbox-wrapper">
-                            <input class="register-form__checkbox" id="restore_me" name="restore_me" type="checkbox" value="true"/>
-                        </div>
-                        <label for="restore_me" class="register-form__checkbox-label">восстановить контент моего экаунта на новом сервисе FreeFeed</label>
-                    </div>
-
-                    <div class="register-form__submit-wrapper">
-                        <button class="register-form__submit" type="submit">Зарегистрироваться на<br/>FreeFeed</button>
-                    </div>
-                </form>
-            </div>
-        {% endif %}
+        {% include 'components/register.twig' %}
     </div>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace Freefeed\Website;
 
 use Freefeed\Website\Controllers\Dashboard;
 use Freefeed\Website\Controllers\Dummy;
+use Freefeed\Website\Controllers\Text;
 use Freefeed\Website\Controllers\User;
 use Monolog\Logger;
 use Predis\Silex\ClientsServiceProvider as PredisProvider;
@@ -130,8 +131,8 @@ class Application extends \Silex\Application
 
     public function setupRouting()
     {
-        $this['controllers.dummy'] = $this->share(function(){
-            return new Dummy();
+        $this['controllers.text'] = $this->share(function(){
+            return new Text($this);
         });
 
         $this['controllers.user'] = $this->share(function(){
@@ -175,8 +176,13 @@ class Application extends \Silex\Application
             $request->attributes->set('_user', $data);
         });
 
-//        $this->get('/', 'controllers.dummy:landingAction')->bind('index');
-        $this->get('/', function(){ return $this->redirect($this->path('register')); })->bind('index');
+        $this->get('/', 'controllers.text:indexAction')->bind('index');
+        $this->get('/moving', 'controllers.text:movingAction')->bind('moving');
+        $this->get('/archive', 'controllers.text:archiveAction')->bind('archive');
+        $this->get('/tos', 'controllers.text:tosAction')->bind('tos');
+        $this->get('/money', 'controllers.text:moneyAction')->bind('money');
+        $this->get('/settings', 'controllers.text:settingsAction')->bind('settings');
+        $this->get('/restore', 'controllers.text:restoreAction')->bind('restore');
 
         $this->get('/refuse', 'controllers.user:refuseAction')->bind('refuse');
         $this->post('/refuse', 'controllers.user:refusePostAction')->bind('refuse_submit');
@@ -197,6 +203,8 @@ class Application extends \Silex\Application
 
         $this->get('/status', 'controllers.user:statusAction')->bind('status');
 
+
+
         $require_admin = function(Request $request) {
             if (!$request->attributes->get('_logged_in', false)) {
                 return $this->redirect($this->path('index'));
@@ -209,7 +217,6 @@ class Application extends \Silex\Application
 
             return null;
         };
-
 
         $this->get('/dash/in', 'controllers.dash:inAction')
             ->before($require_admin);
