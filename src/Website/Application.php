@@ -3,7 +3,6 @@ namespace Freefeed\Website;
 
 
 use Freefeed\Website\Controllers\Dashboard;
-use Freefeed\Website\Controllers\Dummy;
 use Freefeed\Website\Controllers\Text;
 use Freefeed\Website\Controllers\User;
 use Monolog\Logger;
