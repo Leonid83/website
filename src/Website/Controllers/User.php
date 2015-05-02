@@ -446,9 +446,9 @@ class User
 
         $post = $request->request;
 
-        $old  = $post->get('old_password', '');
-        $new1 = $post->get('new_password1', '');
-        $new2 = $post->get('new_password2', '');
+        $old  = $post->get('old', '');
+        $new1 = $post->get('new1', '');
+        $new2 = $post->get('new2', '');
 
         if (strlen($old) == 0 or strlen($new1) == 0 or strlen($new2) == 0) {
             return $app->render('settings.twig', ['error' => 'Для смены паролей должны быть заполнены все 3 поля']);
