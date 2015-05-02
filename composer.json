@@ -30,6 +30,7 @@
     "autoload": {
         "psr-4": {
             "Freefeed\\Clio\\": "src/Clio",
+            "Freefeed\\Pepyatka\\": "src/Pepyatka",
             "Freefeed\\Website\\": "src/Website",
             "Snc\\RedisBundle\\Session\\Storage\\Handler\\": "src/RedisSessions"
         }
