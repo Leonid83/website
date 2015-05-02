@@ -398,4 +398,75 @@ class User
 
         return $app->redirect($app->path('status'), Response::HTTP_SEE_OTHER);
     }
+
+    public function settingsAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false) === false) {
+            return $app->redirect($app->path('login'));
+        }
+
+        /** @var array $user */
+        $user = $request->attributes->get('_user', null);
+
+        if ($user === null) {
+            return $app->redirect($app->path('login'));
+        }
+
+        return $app->render('settings.twig');
+    }
+
+    public function settingsSuccessAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false) === false) {
+            return $app->redirect($app->path('login'));
+        }
+
+        /** @var array $user */
+        $user = $request->attributes->get('_user', null);
+
+        if ($user === null) {
+            return $app->redirect($app->path('login'));
+        }
+
+        return $app->render('settings_success.twig');
+    }
+
+    public function changePasswordAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false) === false) {
+            return $app->redirect($app->path('login'));
+        }
+
+        /** @var array $user */
+        $user = $request->attributes->get('_user', null);
+
+        if ($user === null) {
+            return $app->redirect($app->path('login'));
+        }
+
+        $post = $request->request;
+
+        $old  = $post->get('old_password', '');
+        $new1 = $post->get('new_password1', '');
+        $new2 = $post->get('new_password2', '');
+
+        if (strlen($old) == 0 or strlen($new1) == 0 or strlen($new2) == 0) {
+            return $app->render('settings.twig', ['error' => 'Для смены паролей должны быть заполнены все 3 поля']);
+        }
+
+        if ($new1 != $new2) {
+            return $app->render('settings.twig', ['error' => 'Пароли не совпали']);
+        }
+
+        $hash = password_hash($new1, PASSWORD_DEFAULT);
+
+        $model = new \Freefeed\Website\Models\User($app);
+        $model->setPassword($user['id'], $hash);
+
+        /** @var SessionInterface $session */
+        $session = $app['session'];
+        $session->set('password', $hash);
+
+        return $app->redirect($app->path('settings_success'), Response::HTTP_SEE_OTHER);
+    }
 }

@@ -38,11 +38,6 @@ class Text
         return $this->app->render('money.twig');
     }
 
-    public function settingsAction()
-    {
-        return $this->app->render('settings.twig');
-    }
-
     public function restoreAction()
     {
         return $this->app->render('restore.twig');

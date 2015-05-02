@@ -832,3 +832,12 @@ a:link {
 .h65 {
   height: 65px;
 }
+
+.change_password_form label {
+  display: inline-block;
+  width: 150px;
+}
+
+.change_password_form button {
+  margin-top: 1em;
+}

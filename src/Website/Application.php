@@ -188,7 +188,6 @@ class Application extends \Silex\Application
         $this->get('/archive', 'controllers.text:archiveAction')->bind('archive');
         $this->get('/tos', 'controllers.text:tosAction')->bind('tos');
         $this->get('/money', 'controllers.text:moneyAction')->bind('money');
-        $this->get('/settings', 'controllers.text:settingsAction')->bind('settings');
         $this->get('/restore', 'controllers.text:restoreAction')->bind('restore');
 
         $this->get('/refuse', 'controllers.user:refuseAction')->bind('refuse');
@@ -213,6 +212,9 @@ class Application extends \Silex\Application
 
         $this->post('/register/pepyatka_user', 'controllers.user:createPepyatkaUserAction')->bind('pepyatka_submit');
 
+        $this->get('/settings', 'controllers.user:settingsAction')->bind('settings');
+        $this->get('/settings/success', 'controllers.user:settingsSuccessAction')->bind('settings_success');
+        $this->post('/settings/password', 'controllers.user:changePasswordAction')->bind('change_password_submit');
 
         $require_admin = function(Request $request) {
             if (!$request->attributes->get('_logged_in', false)) {

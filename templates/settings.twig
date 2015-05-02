@@ -2,6 +2,25 @@
 
 {% block content %}
     <div class="content content_left-wide">
-        <p>Страница настроек — не самая приоритетная задача, поэтому здесь пока ничего нет.</p>
+        <h2>Поменять пароль</h2>
+        {% if error is defined %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form action="{{ path('change_password_submit') }}" method="post" class="change_password_form">
+            <div>
+                <label for="old">Старый пароль:</label>
+                <input type="password" name="old" id="old">
+            </div>
+            <div>
+                <label for="new1">Новый пароль:</label>
+                <input type="password" name="new1" id="new1">
+            </div>
+            <div>
+                <label for="new2">Ещё раз:</label>
+                <input type="password" name="new2" id="new2">
+            </div>
+
+            <button type="submit">Поменять</button>
+        </form>
     </div>
 {% endblock %}
