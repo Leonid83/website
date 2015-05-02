@@ -349,4 +349,27 @@ class User
 
         return $app->render('status.twig', $data);
     }
+
+    public function createPepyatkaUserAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false) === false) {
+            return $app->redirect($app->path('login'));
+        }
+
+        /** @var array $user */
+        $user = $request->attributes->get('_user', null);
+
+        if ($user === null) {
+            return $app->redirect($app->path('login'));
+        }
+
+        if ($user['account_validated'] == 0) {
+            $app->abort(Response::HTTP_FORBIDDEN, 'account is not validated');
+        }
+
+        $pp = new \Freefeed\Pepyatka\Api($app);
+        $pp->createUserWithHash($user['friendfeed_username'], $user['password'], $user['email']);
+
+        return $app->render('pepyatka_success.twig');
+    }
 }

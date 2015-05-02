@@ -7,6 +7,7 @@ debug: true
 db:
   master: {}
 clio_api: 'https://clio.freefeed.net/api/'
+pepyatka_server: 'http://localhost:3000/v1/'
 smtp:
   host: localhost
   port: 25

@@ -202,6 +202,7 @@ class Application extends \Silex\Application
 
         $this->get('/status', 'controllers.user:statusAction')->bind('status');
 
+        $this->post('/register/pepyatka_user', 'controllers.user:createPepyatkaUserAction')->bind('pepyatka_submit');
 
 
         $require_admin = function(Request $request) {
