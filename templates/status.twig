@@ -8,18 +8,18 @@
             <p>Мы знаем ваш емейл: <b>{{ email }}</b> (и сможем сообщить новости)</p>
 
             {% if freefeed_status == 'in' %}
-                <p>Мы помним, что вы попросили восстановить ваш аккаунт на FreeFeed</p>
+                <p>Мы помним, что вы попросили восстановить контент вашего аккаунта на FreeFeed</p>
 
-                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="out"><button type="submit">Больше не хочу!</button></form>
+                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="undecided"><button type="submit">Больше не хочу!</button></form>
             {% elseif freefeed_status == 'out' %}
                 <p>Мы помним, что вы попросили не восстановливать ваш аккаунт на FreeFeed</p>
 
-                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="in"><button type="submit">Вообще-то хочу!</button></form>
+                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="undecided"><button type="submit">Вообще-то хочу!</button></form>
             {% else %}
-                <p>Вы не сообщили нам, желаете ли вы восстанавливать аккаунт на FreeFeed. У вас было время подумать. Что вы решили?</p>
+                <p>Мы помним, что вы хотите иметь аккаунт на FreeFeed, но при этом не дали нам разрешение восстанавливать контент вашего аккаунта на FreeFeed</p>
 
-                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="in"><button type="submit">Вообще-то хочу!</button></form>
-                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="out"><button type="submit">Не хочу!</button></form>
+                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="in"><button type="submit">Вообще-то разрешаю!</button></form>
+                <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="out"><button type="submit">И аккаунт не хочу!</button></form>
             {% endif %}
 
             {#
