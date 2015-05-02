@@ -21,12 +21,12 @@ class Api
             throw new \UnexpectedValueException('hash does not look like a valid bcrypt-hash');
         }
 
-        if (strpos($bcrypt_hash, '$2y$10$') === 0) {
+        if (strpos($bcrypt_hash, '$2y$') === 0) {
             // converting to node-compatible mode
-            $bcrypt_hash = '$2a$10$'.substr($bcrypt_hash, 7);
+            $bcrypt_hash = '$2a'.substr($bcrypt_hash, 3);
         }
 
-        if (strpos($bcrypt_hash, '$2a$10$') !== 0) {
+        if (strpos($bcrypt_hash, '$2a$') !== 0) {
             throw new \UnexpectedValueException('hash does not look like a valid bcrypt-hash');
         }
 
