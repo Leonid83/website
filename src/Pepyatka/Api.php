@@ -40,7 +40,7 @@ class Api
         ];
 
         try {
-            $this->endpoint->post('/users', ['body' => $data]);
+            $this->endpoint->post('users', ['body' => $data]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             if ($e->getResponse()->getStatusCode() == 422) {
                 // user already exists
