@@ -176,4 +176,16 @@ class User
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    /**
+     * @return array[]
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function listAccountsWithConfirmedEmails()
+    {
+        $q = "select `friendfeed_username`, `email` from `users` where `email_validated`=1 and `freefeed_status` != 'out'";
+        $stmt = $this->db->executeQuery($q);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
