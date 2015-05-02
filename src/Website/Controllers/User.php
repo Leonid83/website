@@ -458,6 +458,10 @@ class User
             return $app->render('settings.twig', ['error' => 'Пароли не совпали']);
         }
 
+        if (!password_verify($old, $user['password'])) {
+            return $app->render('settings.twig', ['error' => 'Старый пароль введён неправильно']);
+        }
+
         $hash = password_hash($new1, PASSWORD_DEFAULT);
 
         $model = new \Freefeed\Website\Models\User($app);
