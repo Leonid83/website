@@ -11,7 +11,10 @@ class Api
     public function __construct(Application $app)
     {
         $this->endpoint = new Client([
-            'base_url' => [$app->getSettings()['pepyatka_server']],
+            'base_url' => [
+                $app->getSettings()['pepyatka_server'].'/{version}/',
+                ['version' => 'v1']
+            ],
         ]);
     }
 
