@@ -201,6 +201,7 @@ class Application extends \Silex\Application
             ->bind('validate_email');
 
         $this->get('/status', 'controllers.user:statusAction')->bind('status');
+        $this->post('/status/change', 'controllers.user:changeStatusAction')->bind('status_submit');
 
         $this->post('/register/pepyatka_user', 'controllers.user:createPepyatkaUserAction')->bind('pepyatka_submit');
 

@@ -78,6 +78,20 @@ class User
         );
     }
 
+    public function changeStatus($uid, $status)
+    {
+        if (!in_array($status, ['in', 'out'])) {
+            throw new \UnexpectedValueException();
+        }
+
+        $this->db->update(
+            'users',
+            ['freefeed_status' => $status],
+            ['id' => $uid]
+        );
+    }
+
+
     /**
      * @param string $email
      * @return bool

@@ -372,4 +372,30 @@ class User
 
         return $app->render('pepyatka_success.twig');
     }
+
+    public function changeStatusAction(Application $app, Request $request)
+    {
+        if ($request->attributes->get('_logged_in', false) === false) {
+            return $app->redirect($app->path('login'));
+        }
+
+        /** @var array $user */
+        $user = $request->attributes->get('_user', null);
+
+        if ($user === null) {
+            return $app->redirect($app->path('login'));
+        }
+
+        $valid_statuses = ['in', 'out'];
+        $status = $request->request->get('status');
+
+        if (!in_array($status, $valid_statuses)) {
+            $app->abort(Response::HTTP_BAD_REQUEST);
+        }
+
+        $model = new \Freefeed\Website\Models\User($app);
+        $model->changeStatus($user['id'], $status);
+
+        return $app->redirect($app->path('status'), Response::HTTP_SEE_OTHER);
+    }
 }
