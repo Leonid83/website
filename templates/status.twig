@@ -23,7 +23,7 @@
             {% endif %}
 
             {#
-            {% if freefeed_status == 'in' %}
+            {% if freefeed_status != 'out' %}
                 <p><a href="https://freefeed.net/">Альфа-версия FreeFeed</a> уже запущена. Если вы хотите попробовать пользоваться ей, то нажмите кнопку ниже:</p>
                 <form action="{{ path('pepyatka_submit') }}" method="post">
                     <button type="submit">Хочу!</button>
