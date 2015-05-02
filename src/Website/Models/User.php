@@ -80,7 +80,7 @@ class User
 
     public function changeStatus($uid, $status)
     {
-        if (!in_array($status, ['in', 'out'])) {
+        if (!in_array($status, ['in', 'out', 'undecided'])) {
             throw new \UnexpectedValueException();
         }
 

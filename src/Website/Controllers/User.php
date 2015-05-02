@@ -386,7 +386,7 @@ class User
             return $app->redirect($app->path('login'));
         }
 
-        $valid_statuses = ['in', 'out'];
+        $valid_statuses = ['in', 'out', 'undecided'];
         $status = $request->request->get('status');
 
         if (!in_array($status, $valid_statuses)) {
