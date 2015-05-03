@@ -27,9 +27,11 @@
                 <form action="{{ path('pepyatka_submit') }}" method="post">
                     <button type="submit">Хочу!</button>
                 </form>
+                <p>Нажатие этой кнопки означает «Я понимаю, что сервис еще сырой, и гарантии сохранности моих данных нет».</p>
             {% endif %}
 
             {% if clio_info is defined and clio_info != false %}
+                <hr>
                 <p>Поскольку вы авторизовались через Remote Key мы также можем показать вам информацию из <a href="http://clio.freefeed.net/">Clio</a> (пройдите по ссылке если хотите скачать доступные вам архивы):</p>
 
                 <h3>Ваш фид:</h3>
