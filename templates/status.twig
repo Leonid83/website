@@ -22,14 +22,12 @@
                 <form action="{{ path('status_submit') }}" method="post"><input type="hidden" name="status" value="out"><button type="submit">И аккаунт не хочу!</button></form>
             {% endif %}
 
-            {#
             {% if freefeed_status != 'out' %}
                 <p><a href="https://freefeed.net/">Альфа-версия FreeFeed</a> уже запущена. Если вы хотите попробовать пользоваться ей, то нажмите кнопку ниже:</p>
                 <form action="{{ path('pepyatka_submit') }}" method="post">
                     <button type="submit">Хочу!</button>
                 </form>
             {% endif %}
-            #}
 
             {% if clio_info is defined %}
                 <p>Поскольку вы авторизовались через Remote Key мы также можем показать вам информацию из <a href="http://clio.freefeed.net/">Clio</a> (пройдите по ссылке если хотите скачать доступные вам архивы):</p>
